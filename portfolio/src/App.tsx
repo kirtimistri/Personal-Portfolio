@@ -20,7 +20,7 @@ function App() {
       <About />
       <PersonalProjects />
       <SpaceBackground />
-      <BeyondCode />
+     
       <Journey />
       <Contact />
     </>
