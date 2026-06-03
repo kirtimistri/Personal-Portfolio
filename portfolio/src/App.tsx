@@ -7,20 +7,19 @@ import Contact from './components/Contact'
 import Activities from './components/Activities'
 import { Activity } from 'react'
 import Navbar from './components/Navbar'
-import Projects from './components/Projects'
+// import Projects from './components/Projects'
 import SpaceBackground from './components/SpaceBackground'
 
 function App() {
   return (
     <>
-      <Hero />
-      <Activities/>
+      <SpaceBackground />
       <Navbar />
-      <Projects />
+      <Hero />
       <About />
       <PersonalProjects />
-      <SpaceBackground />
-     
+      {/* <Projects /> */}
+      <Activities/>
       <Journey />
       <Contact />
     </>

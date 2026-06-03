@@ -1,4 +1,5 @@
 // BeyondCode.tsx
+
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { 
@@ -166,25 +167,36 @@ export default function BeyondCode() {
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
   const filteredImages = galleryImages.filter(img => img.category === selectedCategory);
+
+  // Responsive grid columns
+  const getGalleryGridCols = () => {
+    if (isMobile) return 1;
+    if (isTablet) return 2;
+    return 4;
+  };
 
   return (
     <section
       ref={ref}
       id="beyond"
-      className="relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-[#05011a] overflow-x-hidden overflow-y-visible"
+      className="relative py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 px-4 sm:px-6 bg-[#05011a] overflow-x-hidden overflow-y-visible"
+      style={{ minHeight: 'auto' }}
     >
       {/* Background gradients */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,#2e1065_0%,transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_80%,#1e1b4b_0%,transparent_55%)]" />
       
-      {/* Floating orbs */}
-      <motion.div
-        animate={{ x: [0, 30, 0], y: [0, -20, 0], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[20%] right-[-10%] w-[40%] aspect-square rounded-full bg-gradient-to-bl from-purple-600/20 via-pink-500/15 to-transparent blur-3xl pointer-events-none"
-      />
+      {/* Floating orbs - hidden on mobile for performance */}
+      {!isMobile && (
+        <motion.div
+          animate={{ x: [0, 30, 0], y: [0, -20, 0], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] right-[-10%] w-[40%] aspect-square rounded-full bg-gradient-to-bl from-purple-600/20 via-pink-500/15 to-transparent blur-3xl pointer-events-none"
+        />
+      )}
       
       <motion.div style={{ y }} className="relative z-10 max-w-7xl mx-auto">
         {/* Section header */}
@@ -192,7 +204,8 @@ export default function BeyondCode() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-10 sm:mb-14 md:mb-16"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -204,15 +217,15 @@ export default function BeyondCode() {
             <span className="text-[10px] sm:text-xs tracking-[0.2em] text-purple-200/90">BEYOND CODE</span>
           </motion.div>
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 sm:mb-4 md:mb-5 px-3 sm:px-4">
             Other orbits I{" "}
             <span className="relative inline-block">
               <motion.span
                 animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.04, 1] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute inset-0 -z-10 blur-3xl bg-gradient-to-r from-purple-600/50 via-pink-500/50 to-orange-500/50 rounded-full"
+                className="absolute inset-0 -z-10 blur-2xl sm:blur-3xl bg-gradient-to-r from-purple-600/50 via-pink-500/50 to-orange-500/50 rounded-full"
               />
-              <span className="relative italic text-transparent bg-clip-text bg-[linear-gradient(110deg,#e879f9_0%,#c084fc_40%,#fde047_100%)] bg-[length:250%_100%] animate-[shimmer_6s_linear_infinite]">
+              <span className="relative italic text-transparent bg-clip-text bg-[linear-gradient(110deg,#e879f9_0%,#c084fc_40%,#fde047_100%)] bg-[length:250%_100%] animate-[shimmer_6s_linear_infinite] text-sm sm:text-base">
                 move in
               </span>
             </span>
@@ -222,8 +235,8 @@ export default function BeyondCode() {
           </p>
         </motion.div>
 
-        {/* Interests Cards Grid - 3 cards only */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-16 sm:mb-20 md:mb-24 px-4 sm:px-0 max-w-5xl mx-auto">
+        {/* Interests Cards Grid - Responsive height */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-7 mb-16 sm:mb-20 md:mb-24 px-4 sm:px-0 max-w-5xl mx-auto">
           {interests.map((interest, i) => (
             <motion.div
               key={interest.title}
@@ -231,22 +244,38 @@ export default function BeyondCode() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="group relative"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="group relative h-full"
             >
-              <div className={`absolute -inset-0.5 bg-gradient-to-r ${interest.color} rounded-2xl blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
-              <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-sm border border-white/15 transition-all duration-300 hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/15 h-full">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${interest.color} p-0.5 mb-4 shadow-md`}>
-                  <div className="w-full h-full rounded-xl bg-[#05011a]/90 flex items-center justify-center">
-                    <interest.icon className="w-6 h-6 text-white/80" />
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${interest.color} rounded-2xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
+              <div className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-sm border border-white/15 transition-all duration-300 hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/15 h-full flex flex-col">
+                <div className="flex-shrink-0">
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${interest.color} p-0.5 mb-4 shadow-md`}>
+                    <div className="w-full h-full rounded-xl bg-[#05011a]/90 flex items-center justify-center">
+                      <interest.icon className="w-6 h-6 text-white/80" />
+                    </div>
                   </div>
+                  <h3 className="text-white font-semibold text-lg sm:text-xl mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-blue-300 transition-all">
+                    {interest.title}
+                  </h3>
+                  <p className="text-purple-300/70 text-sm sm:text-base leading-relaxed mb-3">
+                    {interest.description}
+                  </p>
                 </div>
-                <h3 className="text-white font-semibold text-lg sm:text-xl mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-blue-300 transition-all">
-                  {interest.title}
-                </h3>
-                <p className="text-purple-300/70 text-sm leading-relaxed">
-                  {interest.description}
-                </p>
+                
+                {/* Stats section */}
+                {interest.stats && (
+                  <div className="mt-4 pt-3 border-t border-white/10 flex-shrink-0">
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      {interest.stats.map((stat, idx) => (
+                        <div key={idx} className="flex flex-col">
+                          <span className="text-purple-400/80 text-xs sm:text-sm font-semibold">{stat.value}</span>
+                          <span className="text-purple-300/50 text-[10px] sm:text-xs">{stat.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -261,24 +290,24 @@ export default function BeyondCode() {
           className="mb-12 sm:mb-16"
         >
           {/* Gallery Header */}
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
               Creative{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
                 Gallery
               </span>
             </h3>
-            <p className="text-purple-300/70 text-sm sm:text-base">
+            <p className="text-purple-300/70 text-sm sm:text-base px-4">
               A glimpse into my artistic journey and travel adventures
             </p>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex justify-center mb-8 sm:mb-10">
+          {/* Category Tabs - Responsive */}
+          <div className="flex justify-center mb-8 sm:mb-10 overflow-x-auto px-4">
             <div className="inline-flex p-1 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <button
                 onClick={() => setSelectedCategory("drawing")}
-                className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 md:px-6 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
                   selectedCategory === "drawing"
                     ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/30"
                     : "text-purple-300 hover:text-white hover:bg-white/10"
@@ -289,7 +318,7 @@ export default function BeyondCode() {
               </button>
               <button
                 onClick={() => setSelectedCategory("travelling")}
-                className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 md:px-6 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${
                   selectedCategory === "travelling"
                     ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/30"
                     : "text-purple-300 hover:text-white hover:bg-white/10"
@@ -301,52 +330,51 @@ export default function BeyondCode() {
             </div>
           </div>
 
-          {/* Gallery Grid */}
+          {/* Gallery Grid - Responsive with auto height */}
           <motion.div
             key={selectedCategory}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 px-4 sm:px-0"
+            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 px-4 sm:px-0`}
           >
             {filteredImages.map((image, idx) => (
               <motion.div
                 key={image.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="group cursor-pointer"
+                transition={{ duration: 0.4, delay: Math.min(idx * 0.05, 0.3) }}
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="group cursor-pointer h-full"
                 onClick={() => setSelectedImage(image)}
               >
-                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 transition-all duration-300 hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/15">
+                <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 transition-all duration-300 hover:border-purple-500/40 hover:shadow-xl hover:shadow-purple-500/15 h-full flex flex-col">
                   {/* Image Container */}
-                  <div className="relative aspect-square overflow-hidden bg-purple-900/20">
+                  <div className="relative aspect-square overflow-hidden bg-purple-900/20 flex-shrink-0">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                     <img
                       src={image.src}
                       alt={image.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       onError={(e) => {
-                        // Fallback for missing images
-                        (e.target as HTMLImageElement).src = `https://placehold.co/400x400/2d1b69/ffffff?text=${image.title}`;
+                        (e.target as HTMLImageElement).src = `https://placehold.co/400x400/2d1b69/ffffff?text=${encodeURIComponent(image.title)}`;
                       }}
                     />
                     {/* Overlay with info */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#05011a]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-end p-4">
-                      <p className="text-white font-semibold text-sm">{image.title}</p>
-                      <p className="text-purple-300/80 text-xs">{image.location || image.description}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#05011a]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 flex flex-col justify-end p-3 sm:p-4">
+                      <p className="text-white font-semibold text-xs sm:text-sm">{image.title}</p>
+                      <p className="text-purple-300/80 text-[10px] sm:text-xs">{image.location || image.description}</p>
                     </div>
                   </div>
                   
                   {/* Image Info */}
-                  <div className="p-3 sm:p-4">
-                    <h4 className="text-white font-semibold text-sm sm:text-base mb-1">{image.title}</h4>
-                    <div className="flex items-center gap-2 text-purple-400/80 text-xs">
+                  <div className="p-3 sm:p-4 flex-shrink-0">
+                    <h4 className="text-white font-semibold text-sm sm:text-base mb-1 line-clamp-1">{image.title}</h4>
+                    <div className="flex items-center gap-2 text-purple-400/80 text-[10px] sm:text-xs">
                       {image.location && (
                         <>
-                          <MapPin className="w-3 h-3" />
-                          <span>{image.location}</span>
+                          <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                          <span className="truncate">{image.location}</span>
                         </>
                       )}
                       {image.date && (
@@ -364,22 +392,7 @@ export default function BeyondCode() {
         </motion.div>
 
         {/* Quote Section */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-center mt-12 sm:mt-16"
-        >
-          <div className="inline-block p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-purple-500/30 backdrop-blur-sm max-w-2xl mx-auto">
-            <p className="text-purple-200/80 text-base sm:text-lg md:text-xl italic leading-relaxed">
-              "The best ideas emerge at the intersection of disciplines. 
-              Creativity flows when you let different passions collide."
-            </p>
-            <div className="mt-4 w-12 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent mx-auto" />
-            <p className="text-purple-400/70 text-sm mt-3">— Kirti</p>
-          </div>
-        </motion.div>
+        
       </motion.div>
 
       {/* Lightbox Modal for Gallery Images */}
@@ -390,7 +403,7 @@ export default function BeyondCode() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#05011a]/95 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#05011a]/95 backdrop-blur-md"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -398,32 +411,32 @@ export default function BeyondCode() {
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full rounded-2xl overflow-hidden border border-purple-500/30 bg-gradient-to-br from-[#0d0728] to-[#05011a] shadow-2xl shadow-purple-500/20"
+              className="relative max-w-[95%] sm:max-w-[90%] md:max-w-4xl w-full rounded-2xl overflow-hidden border border-purple-500/30 bg-gradient-to-br from-[#0d0728] to-[#05011a] shadow-2xl shadow-purple-500/20"
             >
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all hover:scale-110"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all hover:scale-110"
               >
                 <X size={isMobile ? 14 : 16} />
               </button>
               
-              <div className="relative">
+              <div className="relative max-h-[70vh] overflow-auto">
                 <img
                   src={selectedImage.src}
                   alt={selectedImage.title}
-                  className="w-full h-auto max-h-[70vh] object-contain bg-purple-900/20"
+                  className="w-full h-auto object-contain bg-purple-900/20"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://placehold.co/800x600/2d1b69/ffffff?text=${selectedImage.title}`;
+                    (e.target as HTMLImageElement).src = `https://placehold.co/800x600/2d1b69/ffffff?text=${encodeURIComponent(selectedImage.title)}`;
                   }}
                 />
               </div>
               
               <div className="p-5 sm:p-6 md:p-8">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">{selectedImage.title}</h3>
-                <div className="flex items-center gap-3 text-purple-400/80 text-xs sm:text-sm mb-3">
+                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">{selectedImage.title}</h3>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-purple-400/80 text-xs sm:text-sm mb-3">
                   {selectedImage.location && (
                     <div className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5" />
+                      <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       <span>{selectedImage.location}</span>
                     </div>
                   )}
