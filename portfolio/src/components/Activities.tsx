@@ -1,4 +1,4 @@
-// BeyondCode.tsx
+﻿// BeyondCode.tsx
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -98,82 +98,82 @@ const interests: Interest[] = [
 const drawingGallery: MediaItem[] = [
   {
     type: "image",
-    url: "/public/D1.jpeg",
-    title: "अंतरपाठ",
+    url: "/D1.jpeg",
+    title: "à¤…à¤‚à¤¤à¤°à¤ªà¤¾à¤ ",
     description: "oil painting of parvati and shiva hands ",
   },
   {
     type: "image",
-    url: "/public/D2.jpeg",
-    title: "अंतरपाठ",
+    url: "/D2.jpeg",
+    title: "à¤…à¤‚à¤¤à¤°à¤ªà¤¾à¤ ",
     description: "oil painting of parvati and shiva hands ",
   },
   {
     type: "image",
-    url: "/public/D3.jpeg",
+    url: "/D3.jpeg",
     title: "Lord Krishna painting",
     description: "Lord Krishna painting",
     
   },
   {
     type: "image",
-    url: "/public/D4.jpeg",
+    url: "/D4.jpeg",
     title: "Lord Krishna painting",
     description: "Lord Krishna painting",
    
   },
   {
     type: "image",
-    url: "/public/D5.jpeg",
+    url: "/D5.jpeg",
     title: "Lord Krishna painting",
     description: "Lord Krishna painting",
     
   },
   {
     type: "image",
-    url: "/public/D6.jpeg",
+    url: "/D6.jpeg",
     title: "KPOP IDOL",
     description: "KPOP IDOL sketch",
     
   },
   {
     type: "image",
-    url: "/public/D7.jpeg",
+    url: "/D7.jpeg",
     title: "Portrait Series",
     description: "Charcoal portrait collection",
    
   },
   {
     type: "image",
-    url: "/public/D8.jpeg",
+    url: "/D8.jpeg",
     title: "Medusa sketch",
     description: "greek mythology character sketch",
    
   },
   {
     type: "image",
-    url: "/public/D9.jpeg",
-    title: "छत्रपती शिवाजी महाराज",
-    description: "छत्रपती शिवाजी महाराज",
+    url: "/D9.jpeg",
+    title: "à¤›à¤¤à¥à¤°à¤ªà¤¤à¥€ à¤¶à¤¿à¤µà¤¾à¤œà¥€ à¤®à¤¹à¤¾à¤°à¤¾à¤œ",
+    description: "à¤›à¤¤à¥à¤°à¤ªà¤¤à¥€ à¤¶à¤¿à¤µà¤¾à¤œà¥€ à¤®à¤¹à¤¾à¤°à¤¾à¤œ",
     
   },
   {
      type: "image",
-    url: "/public/D11.jpeg",
+    url: "/D11.jpeg",
     title: "KPOP IDOL",
     description: "KPOP IDOL sketch in horror theme",
    
   },
   {
     type: "image",
-    url: "/public/D11.jpeg",
+    url: "/D11.jpeg",
     title: "KPOP IDOL",
     description: "KPOP IDOL sketch in horror theme",
     
   },
   {
     type: "image",
-    url: "/public/D12.jpeg",
+    url: "/D12.jpeg",
     title: "RANDOM CHARACTER",
     description: "RANDOM CHARACTER sketch",
     
@@ -181,14 +181,14 @@ const drawingGallery: MediaItem[] = [
   
   {
     type: "image",
-    url: "/public/D13.jpeg",
+    url: "/D13.jpeg",
     title: "HUMAN HEART painting ",
     description: "HUMAN HEART painting ",
     
   },
   {
     type: "image",
-    url: "/public/D14.jpeg",
+    url: "/D14.jpeg",
     title: "Elbert ainstein sketch",
     description: " Great scientest Elbert ainstein sketch",
     
@@ -199,7 +199,7 @@ const drawingGallery: MediaItem[] = [
 const travelGallery: MediaItem[] = [
   {
     type: "image",
-    url: "/gallery/travel-1.jpg",
+    url: "/sin1.jpeg",
     title: "Swiss Alps",
     description: "Breathtaking views of the Swiss mountains",
     location: "Switzerland",
@@ -207,7 +207,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-2.jpg",
+    url: "/sin2.jpeg",
     title: "Kyoto Temple",
     description: "Ancient temple in cherry blossom season",
     location: "Kyoto, Japan",
@@ -215,7 +215,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-3.jpg",
+    url: "/sin3.jpeg",
     title: "Santorini Sunset",
     description: "Iconic blue domes at golden hour",
     location: "Santorini, Greece",
@@ -223,7 +223,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-4.jpg",
+    url: "/sin4.jpeg",
     title: "Northern Lights",
     description: "Aurora borealis dancing across the sky",
     location: "Iceland",
@@ -231,8 +231,8 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "video",
-    url: "/public/travel-reel.mp4",
-    thumbnail: "/gallery/travel-1.jpg",
+    url: "/solarsys.mp4",
+    thumbnail: "/sin1.jpeg",
     title: "Travel Memories Reel",
     description: "A compilation of my best travel moments",
     location: "Various Locations",
@@ -240,7 +240,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-5.jpg",
+    url: "/sin5.jpeg",
     title: "Bali Rice Terraces",
     description: "Tegalalang Rice Terraces at sunrise",
     location: "Bali, Indonesia",
@@ -248,7 +248,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-6.jpg",
+    url: "/sin6.jpeg",
     title: "Parisian Streets",
     description: "Morning light in Montmartre",
     location: "Paris, France",
@@ -256,7 +256,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-7.jpg",
+    url: "/sin7.jpeg",
     title: "Safari Adventure",
     description: "Elephants in Amboseli National Park",
     location: "Kenya",
@@ -264,8 +264,8 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "video",
-    url: "/public/city-exploration.mp4",
-    thumbnail: "/gallery/travel-6.jpg",
+    url: "/solarsys.mp4",
+    thumbnail: "/sin6.jpeg",
     title: "City Exploration",
     description: "Walking through historic European streets",
     location: "Europe",
@@ -273,7 +273,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-8.jpg",
+    url: "/sin8.jpeg",
     title: "Machu Picchu",
     description: "Ancient Incan citadel in the clouds",
     location: "Peru",
@@ -281,7 +281,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-9.jpg",
+    url: "/sin9.jpeg",
     title: "Maldives Beach",
     description: "Crystal clear waters and white sand",
     location: "Maldives",
@@ -289,7 +289,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/gallery/travel-10.jpg",
+    url: "/sin10.jpeg",
     title: "New York Skyline",
     description: "Manhattan at night",
     location: "New York, USA",
@@ -297,8 +297,8 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "video",
-    url: "/public/beach-sunset.mp4",
-    thumbnail: "/gallery/travel-9.jpg",
+    url: "/solarsys.mp4",
+    thumbnail: "/sin9.jpeg",
     title: "Beach Sunset Timelapse",
     description: "Mesmerizing sunset over the Indian Ocean",
     location: "Maldives",
@@ -469,7 +469,7 @@ function MediaGalleryModal({
             )}
             {currentMedia.date && (
               <div className="flex items-center gap-1">
-                <span>📅</span>
+                <span>ðŸ“…</span>
                 <span>{currentMedia.date}</span>
               </div>
             )}
@@ -825,14 +825,14 @@ export default function BeyondCode() {
                       )}
                       {item.date && (
                         <>
-                          <span>•</span>
+                          <span>â€¢</span>
                           <span>{item.date}</span>
                         </>
                       )}
                     </div>
                     <div className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <span className="text-xs text-purple-400 group-hover:text-purple-300 transition-colors">
-                        Click to view →
+                        Click to view â†’
                       </span>
                     </div>
                   </div>

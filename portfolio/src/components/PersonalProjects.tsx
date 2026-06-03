@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+﻿import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef } from "react";
 import {
   ArrowUpRight,
@@ -76,11 +76,11 @@ const ongoingProjects: Project[] = [
     "Real-time seat availability"
   ],
   github: "#",
-  imageUrl: "/public/ticketzila.jpeg",
+  imageUrl: "/ticketzila.jpeg",
   media: [
-    { type: "image", url: "/public/ticketzila.jpeg", title: "TicketZila Dashboard" },
-    { type: "image", url: "/public/ticketzila2.jpeg", title: "Seat Selection" },
-    { type: "video", url: "/public/ticketzila-demo.mp4", thumbnail: "/public/ticketzila.jpeg", title: "Platform Demo" },
+    { type: "image", url: "/ticketzila.jpeg", title: "TicketZila Dashboard" },
+    { type: "image", url: "/ticketzila2.jpeg", title: "Seat Selection" },
+    { type: "video", url: "/ticketzila-demo.mp4", thumbnail: "/ticketzila.jpeg", title: "Platform Demo" },
   ],
   status: "ongoing",
   progress: 20,
@@ -94,7 +94,7 @@ const ongoingProjects: Project[] = [
 
       <div className="flex-1 bg-black/30 rounded-lg p-3">
         <div className="text-orange-300 font-semibold mb-3">
-          🎬 TicketZila
+          ðŸŽ¬ TicketZila
         </div>
 
         <div className="grid grid-cols-6 gap-1 mb-4">
@@ -158,10 +158,10 @@ const fullStackProjects: Project[] = [
     "Custom music player interface"
   ],
   github: "#",
-  imageUrl: "public/Resso1.jpeg",
+  imageUrl: "/Resso1.jpeg",
   media: [
-    { type: "image", url: "public/Resso1.jpeg", title: "Home Screen" },
-    { type: "image", url: "public/Resso2.jpeg", title: "Player View" },
+    { type: "image", url: "/Resso1.jpeg", title: "Home Screen" },
+    { type: "image", url: "/Resso2.jpeg", title: "Player View" },
     
   ],
   status: "completed",
@@ -176,7 +176,7 @@ const fullStackProjects: Project[] = [
 
       <div className="flex-1 bg-black/30 rounded-lg p-3">
         <div className="text-pink-300 font-semibold mb-3">
-          🎵 Now Playing
+          ðŸŽµ Now Playing
         </div>
 
         <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-pink-500/50 to-purple-500/50 mx-auto mb-3" />
@@ -190,9 +190,9 @@ const fullStackProjects: Project[] = [
         </div>
 
         <div className="flex justify-center gap-4 mt-4 text-white/70">
-          <span>⏮</span>
-          <span>▶</span>
-          <span>⏭</span>
+          <span>â®</span>
+          <span>â–¶</span>
+          <span>â­</span>
         </div>
       </div>
     </div>
@@ -228,9 +228,9 @@ const fullStackProjects: Project[] = [
   ],
   github: "#",
   live: "#",
-  imageUrl: "/public/Chitchat.jpeg",
+  imageUrl: "/Chitchat.jpeg",
   media: [
-    { type: "image", url: "/public/Chitchat.jpeg", title: "Chat Interface" },
+    { type: "image", url: "/Chitchat.jpeg", title: "Chat Interface" },
     
   ],
   status: "completed",
@@ -291,17 +291,17 @@ const miniProjects: Project[] = [
       "Immersive space exploration"
     ],
     github: "#",
-    imageUrl: "/public/sys.jpeg",
+    imageUrl: "/sys.jpeg",
     media: [
       {
         type: "video",
-        url: "/public/solarsys.mp4",
-        thumbnail: "/public/sys.jpeg",
+        url: "/solarsys.mp4",
+        thumbnail: "/sys.jpeg",
         title: "Solar System Overview"
       },
       {
         type: "image",
-        url: "/public/sys.jpeg",
+        url: "/sys.jpeg",
         title: "Planet Exploration Mode"
       }
     ],
@@ -309,13 +309,13 @@ const miniProjects: Project[] = [
     preview: (
       <div className="relative w-full h-full">
         <video
-          src="/public/solarsys.mp4"
+          src="/solarsys.mp4"
           className="w-full h-full object-cover"
           autoPlay
           loop
           muted
           playsInline
-          poster="/public/sys.jpeg"
+          poster="/sys.jpeg"
         />
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute bottom-3 left-3 z-10 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm">
@@ -356,7 +356,7 @@ const miniProjects: Project[] = [
   ],
   github: "#",
   live: "#",
-  imageUrl: "/public/infotech.jpeg",
+  imageUrl: "/infotech.jpeg",
   media: [
     {
       type: "image",
@@ -388,7 +388,7 @@ const miniProjects: Project[] = [
 
       <div className="mt-3 flex justify-between items-center text-xs">
         <span className="text-white/60">IT Services & Solutions</span>
-        <span className="text-cyan-300">Explore →</span>
+        <span className="text-cyan-300">Explore â†’</span>
       </div>
     </div>
   ),
@@ -423,16 +423,16 @@ const miniProjects: Project[] = [
   ],
   github: "#",
   live: "#",
-  imageUrl: "/public/sin 1.jpeg",
+  imageUrl: "/sin%201.jpeg",
   media: [
     {
       type: "image",
-      url: "/public/sin 1.jpeg",
+      url: "/sin%201.jpeg",
       title: "Gameplay Screen"
     },
     {
       type: "image",
-      url: "/public/sin2.jpeg",
+      url: "/sin2.jpeg",
       title: "Gameplay Screen"
     }
   ],
@@ -450,11 +450,11 @@ const miniProjects: Project[] = [
 
       <div className="flex-1 rounded-lg bg-gradient-to-b from-sky-400/20 to-green-500/20 border border-white/10 relative overflow-hidden">
         <div className="absolute bottom-3 left-8 text-2xl">
-          👦
+          ðŸ‘¦
         </div>
 
         <div className="absolute bottom-3 right-8 text-xl">
-          🚧
+          ðŸš§
         </div>
 
         <div className="absolute top-3 right-3 text-xs text-yellow-300">
@@ -464,7 +464,7 @@ const miniProjects: Project[] = [
 
       <div className="mt-3 flex justify-between items-center text-xs">
         <span className="text-white/60">Arcade Game</span>
-        <span className="text-yellow-300">Press Space →</span>
+        <span className="text-yellow-300">Press Space â†’</span>
       </div>
     </div>
   ),
@@ -499,7 +499,7 @@ const miniProjects: Project[] = [
   ],
   github: "#",
   live: "#",
-  imageUrl: "/public/ecom.jpeg",
+  imageUrl: "/ecom.jpeg",
   media: [
     {
       type: "image",
@@ -539,7 +539,7 @@ const miniProjects: Project[] = [
           Cart Items: 3
         </span>
         <span className="text-xs text-orange-300">
-          Checkout →
+          Checkout â†’
         </span>
       </div>
     </div>
@@ -573,12 +573,12 @@ const miniProjects: Project[] = [
   ],
   github: "#",
   live: "#",
-  imageUrl: "/public/ed.jpeg",
+  imageUrl: "/ed.jpeg",
   media: [
     
     {
       type: "image",
-      url: "/public/ed.jpeg",
+      url: "/ed.jpeg",
       title: "Real-Time Face Detection"
     }
   ],
@@ -595,7 +595,7 @@ const miniProjects: Project[] = [
       <div className="flex-1 bg-black/20 rounded-lg border border-white/10 flex items-center justify-center">
         <div className="relative">
           <div className="w-20 h-20 rounded-full border-2 border-pink-400/60 flex items-center justify-center">
-            😊
+            ðŸ˜Š
           </div>
 
           <div className="absolute -top-2 -right-4 px-2 py-1 rounded bg-pink-500/30 text-[10px] text-pink-200">
@@ -1253,7 +1253,7 @@ export default function PersonalProjects() {
                   <div className="flex items-center gap-2">
                     <Loader2 className="w-3.5 h-3.5 text-orange-400 animate-spin" />
                     <span className="text-xs text-orange-300 font-medium">
-                      In Development • {active.progress}% Complete
+                      In Development â€¢ {active.progress}% Complete
                     </span>
                   </div>
                 </div>

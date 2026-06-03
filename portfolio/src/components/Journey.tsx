@@ -79,7 +79,7 @@ const achievements = [
     date: "2023",
     description:
       "Won 1st place among 500+ participants for building an AI-powered accessibility tool that helps visually impaired users navigate websites.",
-    image: "/achievements/hackathon.jpg",
+    image: "/ecom.jpeg",
     icon: Trophy,
     color: "from-yellow-500 to-amber-500",
     location: "San Francisco, CA",
@@ -92,7 +92,7 @@ const achievements = [
     date: "2024",
     description:
       "Recognized for contributing 50+ pull requests to major open source projects including React, Next.js, and Tailwind CSS documentation.",
-    image: "/achievements/opensource.jpg",
+    image: "/ticketzila.jpeg",
     icon: Star,
     color: "from-green-500 to-emerald-500",
     location: "Remote",
@@ -105,7 +105,7 @@ const achievements = [
     date: "2023",
     description:
       "Awarded for exceptional UI/UX design in a 48-hour hackathon, building a mental health wellness app.",
-    image: "/achievements/design.jpg",
+    image: "/ed.jpeg",
     icon: Palette,
     color: "from-purple-500 to-pink-500",
     location: "New York, NY",
@@ -118,7 +118,7 @@ const achievements = [
     date: "2022",
     description:
       "Completed 100 consecutive days of coding, building and deploying a project every single day for 100 days.",
-    image: "/achievements/100days.jpg",
+    image: "/infotech.jpeg",
     icon: Medal,
     color: "from-red-500 to-rose-500",
     location: "Online",
@@ -135,7 +135,7 @@ const certifications = [
     description:
       "Completed 1000+ hours of coding challenges and built 5 full-stack projects including e-commerce, social media, and analytics dashboards.",
     credentialId: "FCC-2023-789",
-    image: "/certificates/fullstack.jpg",
+    image: "/Resso1.jpeg",
     icon: Award,
     color: "from-amber-500 to-orange-500",
     skills: ["JavaScript", "React", "Node.js", "MongoDB"],
@@ -148,7 +148,7 @@ const certifications = [
     description:
       "Certified in cloud fundamentals, AWS services, security best practices, pricing models, and architectural principles.",
     credentialId: "AWS-CP-2024-456",
-    image: "/certificates/aws.jpg",
+    image: "/Resso2.jpeg",
     icon: Cloud,
     color: "from-orange-500 to-yellow-500",
     skills: ["EC2", "S3", "Lambda", "CloudFormation"],
@@ -161,7 +161,7 @@ const certifications = [
     description:
       "Professional certificate covering advanced React, UI/UX principles, and front-end development best practices.",
     credentialId: "META-FE-2023-234",
-    image: "/certificates/meta.jpg",
+    image: "/Chitchat.jpeg",
     icon: Code2,
     color: "from-blue-500 to-cyan-500",
     skills: ["React", "UX Design", "APIs", "Testing"],
