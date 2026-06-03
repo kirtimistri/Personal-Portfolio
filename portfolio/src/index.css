@@ -1,5 +1,23 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@layer base {
+  body {
+    background-color: #05011a;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
 @theme {
   --color-purple-400: #c084fc;
   --color-purple-500: #a855f7;

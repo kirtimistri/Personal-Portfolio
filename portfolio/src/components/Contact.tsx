@@ -13,7 +13,17 @@ import SpaceBackground from "./SpaceBackground";
 const EMAILJS_SERVICE_ID = "service_xx9czk5";
 const EMAILJS_TEMPLATE_ID = "template_q84i32d";
 const EMAILJS_PUBLIC_KEY = "KJDQnIcVe32R1AzIc";
-
+// Fix AudioContext autoplay policy
+if (typeof window !== 'undefined') {
+  window.userInteracted = false;
+  const initAudio = () => {
+    window.userInteracted = true;
+    document.removeEventListener('click', initAudio);
+    document.removeEventListener('keydown', initAudio);
+  };
+  document.addEventListener('click', initAudio);
+  document.addEventListener('keydown', initAudio);
+}
 // Sound effects
 const playSound = (type: 'hello' | 'message' | 'pet' | 'typing' | 'click' | 'hover') => {
   const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
@@ -93,7 +103,7 @@ function SplineCatModel({ onClick, isChatOpen }: { onClick: () => void; isChatOp
     // Load Spline viewer script
     const script = document.createElement('script');
     script.type = 'module';
-    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
+    script.src = 'https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js';
     script.onload = () => {
       setIsLoaded(true);
     };
