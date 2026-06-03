@@ -79,8 +79,8 @@ const ongoingProjects: Project[] = [
   imageUrl: "/ticketzila.jpeg",
   media: [
     { type: "image", url: "/ticketzila.jpeg", title: "TicketZila Dashboard" },
-    { type: "image", url: "/ticketzila2.jpeg", title: "Seat Selection" },
-    { type: "video", url: "/ticketzila-demo.mp4", thumbnail: "/ticketzila.jpeg", title: "Platform Demo" },
+    { type: "image", url: "/ecom.jpeg", title: "Seat Selection" },
+    { type: "video", url: "/solarsys.mp4", thumbnail: "/ticketzila.jpeg", title: "Platform Demo" },
   ],
   status: "ongoing",
   progress: 20,
@@ -360,7 +360,7 @@ const miniProjects: Project[] = [
   media: [
     {
       type: "image",
-      url: "/projects/infotech-website.jpg",
+      url: "/infotech.jpeg",
       title: "Homepage"
     }
   ],
@@ -503,7 +503,7 @@ const miniProjects: Project[] = [
   media: [
     {
       type: "image",
-      url: "/projects/ecommerce-platform.jpg",
+      url: "/ecom.jpeg",
       title: "Home Page"
     },
     

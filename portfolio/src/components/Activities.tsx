@@ -215,7 +215,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin3.jpeg",
+    url: "/D10.jpeg",
     title: "Santorini Sunset",
     description: "Iconic blue domes at golden hour",
     location: "Santorini, Greece",
@@ -223,7 +223,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin4.jpeg",
+    url: "/D11.jpeg",
     title: "Northern Lights",
     description: "Aurora borealis dancing across the sky",
     location: "Iceland",
@@ -240,7 +240,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin5.jpeg",
+    url: "/D12.jpeg",
     title: "Bali Rice Terraces",
     description: "Tegalalang Rice Terraces at sunrise",
     location: "Bali, Indonesia",
@@ -248,7 +248,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin6.jpeg",
+    url: "/D13.jpeg",
     title: "Parisian Streets",
     description: "Morning light in Montmartre",
     location: "Paris, France",
@@ -256,7 +256,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin7.jpeg",
+    url: "/D1.jpeg",
     title: "Safari Adventure",
     description: "Elephants in Amboseli National Park",
     location: "Kenya",
@@ -265,7 +265,7 @@ const travelGallery: MediaItem[] = [
   {
     type: "video",
     url: "/solarsys.mp4",
-    thumbnail: "/sin6.jpeg",
+    thumbnail: "/D13.jpeg",
     title: "City Exploration",
     description: "Walking through historic European streets",
     location: "Europe",
@@ -273,7 +273,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin8.jpeg",
+    url: "/D2.jpeg",
     title: "Machu Picchu",
     description: "Ancient Incan citadel in the clouds",
     location: "Peru",
@@ -281,7 +281,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin9.jpeg",
+    url: "/D3.jpeg",
     title: "Maldives Beach",
     description: "Crystal clear waters and white sand",
     location: "Maldives",
@@ -289,7 +289,7 @@ const travelGallery: MediaItem[] = [
   },
   {
     type: "image",
-    url: "/sin10.jpeg",
+    url: "/D4.jpeg",
     title: "New York Skyline",
     description: "Manhattan at night",
     location: "New York, USA",
@@ -298,7 +298,7 @@ const travelGallery: MediaItem[] = [
   {
     type: "video",
     url: "/solarsys.mp4",
-    thumbnail: "/sin9.jpeg",
+    thumbnail: "/D14.jpeg",
     title: "Beach Sunset Timelapse",
     description: "Mesmerizing sunset over the Indian Ocean",
     location: "Maldives",
