@@ -4,7 +4,7 @@ import {
   Mail, Github, Linkedin, Twitter, Send, Bot, X, SendIcon, User, 
   Briefcase, Code, Sparkles, MessageCircle, Instagram, Heart, 
   PawPrint, Smile, Coffee, Star, Volume2, VolumeX, Mic, 
-  Zap, Cpu, Wifi, Radio
+  Zap, Cpu, Wifi, Radio, MapPin, Clock, CheckCircle
 } from "lucide-react";
 import emailjs from '@emailjs/browser';
 import SpaceBackground from "./SpaceBackground";
@@ -13,19 +13,13 @@ import SpaceBackground from "./SpaceBackground";
 const EMAILJS_SERVICE_ID = "service_xx9czk5";
 const EMAILJS_TEMPLATE_ID = "template_q84i32d";
 const EMAILJS_PUBLIC_KEY = "KJDQnIcVe32R1AzIc";
-// Fix AudioContext autoplay policy
-if (typeof window !== 'undefined') {
-  window.userInteracted = false;
-  const initAudio = () => {
-    window.userInteracted = true;
-    document.removeEventListener('click', initAudio);
-    document.removeEventListener('keydown', initAudio);
-  };
-  document.addEventListener('click', initAudio);
-  document.addEventListener('keydown', initAudio);
-}
-// Sound effects
+
+// Sound effects - with user interaction check
+let userInteracted = false;
+
 const playSound = (type: 'hello' | 'message' | 'pet' | 'typing' | 'click' | 'hover') => {
+  if (!userInteracted) return;
+  
   const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
   if (!AudioContextClass) return;
   
@@ -36,211 +30,108 @@ const playSound = (type: 'hello' | 'message' | 'pet' | 'typing' | 'click' | 'hov
   oscillator.connect(gainNode);
   gainNode.connect(audioContext.destination);
   
-  switch(type) {
-    case 'hello':
-      oscillator.frequency.value = 523.25;
-      gainNode.gain.value = 0.25;
-      oscillator.type = 'sine';
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.6);
-      break;
-    case 'message':
-      oscillator.frequency.value = 659.25;
-      gainNode.gain.value = 0.2;
-      oscillator.type = 'sine';
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.4);
-      break;
-    case 'pet':
-      oscillator.frequency.value = 392.00;
-      gainNode.gain.value = 0.15;
-      oscillator.type = 'sine';
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.3);
-      break;
-    case 'typing':
-      oscillator.frequency.value = 493.88;
-      gainNode.gain.value = 0.1;
-      oscillator.type = 'sine';
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.2);
-      break;
-    case 'click':
-      oscillator.frequency.value = 880.00;
-      gainNode.gain.value = 0.08;
-      oscillator.type = 'sine';
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.15);
-      break;
-    case 'hover':
-      oscillator.frequency.value = 1046.50;
-      gainNode.gain.value = 0.05;
-      oscillator.type = 'sine';
-      oscillator.start();
-      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.1);
-      break;
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
   }
+  
+  const frequencies = {
+    hello: 523.25,
+    message: 659.25,
+    pet: 392.00,
+    typing: 493.88,
+    click: 880.00,
+    hover: 1046.50
+  };
+  
+  oscillator.frequency.value = frequencies[type];
+  gainNode.gain.value = { hello: 0.25, message: 0.2, pet: 0.15, typing: 0.1, click: 0.08, hover: 0.05 }[type];
+  oscillator.type = 'sine';
+  oscillator.start();
+  gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.4);
   
   setTimeout(() => {
     oscillator.stop();
     audioContext.close();
-  }, 500);
+  }, 400);
 };
 
-// Spline 3D Cat Model Component
+// Spline 3D Cat Model Component - Simplified for better performance
 function SplineCatModel({ onClick, isChatOpen }: { onClick: () => void; isChatOpen: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check if script already exists
     if (document.querySelector('script[src*="spline-viewer"]')) {
       setIsLoaded(true);
       return;
     }
 
-    // Load Spline viewer script
     const script = document.createElement('script');
     script.type = 'module';
-    script.src = 'https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js';
-    script.onload = () => {
-      setIsLoaded(true);
-    };
-    script.onerror = () => {
-      console.error("Failed to load Spline viewer");
-      setIsLoaded(false);
-    };
+    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
+    script.onload = () => setIsLoaded(true);
+    script.onerror = () => setIsLoaded(false);
     document.head.appendChild(script);
-
-    return () => {
-      // Don't remove script to avoid reload issues
-    };
   }, []);
-
-  const handleMouseEnter = () => {
-    if (!isChatOpen) {
-      playSound('hover');
-      setIsHovered(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleClick = () => {
-    playSound('click');
-    onClick();
-  };
 
   return (
     <motion.div
-      animate={{
-        y: isHovered ? [0, -8, 0] : 0,
-        scale: isHovered ? 1.02 : 1
-      }}
-      transition={{
-        y: { duration: 0.5, repeat: isHovered ? Infinity : 0, repeatDelay: 1 },
-        scale: { duration: 0.3 }
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
+      animate={{ y: isHovered ? [0, -5, 0] : 0 }}
+      transition={{ y: { duration: 0.5, repeat: isHovered ? Infinity : 0, repeatDelay: 1 } }}
+      onMouseEnter={() => !isChatOpen && (playSound('hover'), setIsHovered(true))}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => (playSound('click'), onClick())}
       className="relative cursor-pointer group"
-      ref={containerRef}
     >
-      <div className="relative w-64 h-64 mx-auto">
-        {/* Glowing aura effect */}
+      <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto">
         <motion.div
-          animate={{ 
-            scale: [1, 1.05, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
+          animate={{ scale: [1, 1.05, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute inset-[-15px] rounded-full bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-2xl"
+          className="absolute inset-[-20px] rounded-full bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 blur-2xl"
         />
-        
-        {/* Rotating rings */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-[-10px] rounded-full border-2 border-purple-500/30"
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-[-15px] rounded-full border-2 border-purple-500/30"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-[-18px] rounded-full border border-pink-500/20"
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-[-25px] rounded-full border border-pink-500/20"
         />
 
-        {/* Spline 3D Model - Fixed version */}
-        <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+        <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-purple-600/20 to-pink-600/20">
           {isLoaded ? (
             <spline-viewer 
               url="https://prod.spline.design/hN1sUEAiuJAQeRuV/scene.splinecode"
               style={{ width: '100%', height: '100%', border: 'none' }}
-            ></spline-viewer>
+            />
           ) : (
-            <div className="w-48 h-48 rounded-full bg-gradient-to-br from-purple-600/30 to-pink-600/30 flex items-center justify-center animate-pulse">
-              <Bot className="w-16 h-16 text-purple-400" />
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-600/40 to-pink-600/40 flex items-center justify-center animate-pulse">
+              <Bot className="w-12 h-12 text-purple-400" />
             </div>
           )}
         </div>
-
-        {/* Floating particles */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              y: [0, -20 - i * 2, 0],
-              x: [0, (i % 2 === 0 ? 15 : -15), 0],
-              opacity: [0, 0.6, 0],
-              scale: [0, 1, 0]
-            }}
-            transition={{
-              duration: 3 + i * 0.3,
-              repeat: Infinity,
-              delay: i * 0.2,
-              ease: "easeInOut"
-            }}
-            className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
-            style={{
-              top: '50%',
-              left: '50%',
-              transformOrigin: 'center'
-            }}
-          />
-        ))}
       </div>
 
-      {/* Speech Bubble */}
       <AnimatePresence>
         {isHovered && !isChatOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="absolute -top-16 left-1/2 -translate-x-1/2 whitespace-nowrap z-20"
+            className="absolute -top-14 left-1/2 -translate-x-1/2 whitespace-nowrap z-20"
           >
-            <div className="relative">
-              <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 text-white text-sm font-bold px-4 py-2 rounded-full shadow-2xl">
-                <span className="flex items-center gap-2">
-                  <motion.span
-                    animate={{ rotate: [0, 15, -15, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity }}
-                  >
-                    🐱
-                  </motion.span>
-                  Meow! Say Hi!
-                </span>
-              </div>
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-gradient-to-r from-pink-500 to-indigo-500" />
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-xl">
+              <span className="flex items-center gap-2">
+                🐱 Say Hi! Click me
+              </span>
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-pink-600" />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Status indicator */}
       <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
         <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5">
           <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
@@ -248,20 +139,8 @@ function SplineCatModel({ onClick, isChatOpen }: { onClick: () => void; isChatOp
         </div>
       </div>
 
-      <p className="text-center text-purple-300/80 text-sm mt-5 flex items-center justify-center gap-2">
-        <motion.span
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          🐱
-        </motion.span>
-        Click to chat with my 3D cat!
-        <motion.span
-          animate={{ x: [0, 5, 0] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        >
-          💬
-        </motion.span>
+      <p className="text-center text-purple-300/70 text-xs sm:text-sm mt-4">
+        Click to chat with my 3D cat assistant 🐱
       </p>
     </motion.div>
   );
@@ -271,15 +150,13 @@ function SplineCatModel({ onClick, isChatOpen }: { onClick: () => void; isChatOp
 function VirtualPet({ onClick, onSound }: { onClick: () => void; onSound: () => void }) {
   const [emotion, setEmotion] = useState<"idle" | "happy" | "excited" | "sleepy">("idle");
   const [petState, setPetState] = useState<"idle" | "petting">("idle");
-  const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number }[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const emotions: ("idle" | "happy" | "excited" | "sleepy")[] = ["idle", "happy", "excited", "sleepy"];
-      const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
-      setEmotion(randomEmotion);
+      setEmotion(emotions[Math.floor(Math.random() * emotions.length)]);
       setTimeout(() => setEmotion("idle"), 3000);
-    }, 8000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -287,14 +164,6 @@ function VirtualPet({ onClick, onSound }: { onClick: () => void; onSound: () => 
     setPetState("petting");
     onSound();
     onClick();
-    
-    const newSparkles = Array.from({ length: 8 }, (_, i) => ({
-      id: Date.now() + i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-    }));
-    setSparkles(newSparkles);
-    setTimeout(() => setSparkles([]), 500);
     setTimeout(() => setPetState("idle"), 500);
   };
 
@@ -304,43 +173,21 @@ function VirtualPet({ onClick, onSound }: { onClick: () => void; onSound: () => 
         animate={{ 
           y: [0, -8, 0],
           rotate: [0, 3, -3, 0],
-          scale: petState === "petting" ? 1.2 : 1
+          scale: petState === "petting" ? 1.15 : 1
         }}
-        transition={{ 
-          y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-          rotate: { duration: 0.5, repeat: Infinity, repeatDelay: 2 },
-          scale: { duration: 0.2 }
-        }}
+        transition={{ y: { duration: 2, repeat: Infinity }, rotate: { duration: 0.5, repeat: Infinity, repeatDelay: 2 }, scale: { duration: 0.2 } }}
         onClick={handleClick}
         className="cursor-pointer relative"
       >
-        {sparkles.map((sparkle) => (
-          <motion.div
-            key={sparkle.id}
-            initial={{ opacity: 1, scale: 1 }}
-            animate={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute w-2 h-2 rounded-full bg-yellow-400"
-            style={{ left: `${sparkle.x}%`, top: `${sparkle.y}%` }}
-          />
-        ))}
-        
-        <div className={`w-28 h-28 rounded-full bg-gradient-to-br from-purple-500/40 to-pink-500/40 flex items-center justify-center backdrop-blur-sm ${emotion === "happy" ? "animate-wiggle" : emotion === "excited" ? "animate-bounce" : ""}`}>
-          <div className="text-center relative">
-            <PawPrint className="w-14 h-14 text-purple-400 mx-auto" />
-            <div className="flex gap-2 justify-center mt-2">
-              {emotion === "happy" && <Smile className="w-3 h-3 text-yellow-400 animate-pulse" />}
-              {emotion === "excited" && <Sparkles className="w-3 h-3 text-pink-400 animate-spin" />}
-              {emotion === "sleepy" && <Coffee className="w-3 h-3 text-blue-400" />}
-            </div>
+        <div className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-purple-500/40 to-pink-500/40 flex items-center justify-center backdrop-blur-sm ${emotion === "happy" ? "animate-wiggle" : emotion === "excited" ? "animate-bounce" : ""}`}>
+          <PawPrint className="w-12 h-12 sm:w-14 sm:h-14 text-purple-400" />
+          <div className="absolute -top-1 -right-1">
+            <Heart className="w-3 h-3 text-pink-400 animate-pulse" />
           </div>
         </div>
-        <div className="absolute -top-1 -right-1">
-          <Heart className="w-3 h-3 text-pink-400 animate-pulse" />
-        </div>
       </motion.div>
-      <p className="text-purple-300/70 text-xs mt-3 text-center">
-        {petState === "petting" ? "🥰 Purrr! So happy!" : "🐾 Pet me for good luck!"}
+      <p className="text-purple-300/60 text-[10px] sm:text-xs mt-2 text-center">
+        {petState === "petting" ? "🥰 Purrr! So happy!" : "🐾 Pet me!"}
       </p>
     </div>
   );
@@ -348,7 +195,7 @@ function VirtualPet({ onClick, onSound }: { onClick: () => void; onSound: () => 
 
 // AI Chatbot responses
 const chatbotResponses: Record<string, string> = {
-  "who are you": "I'm Kirti — a passionate Full Stack Developer who loves building beautiful web applications and creating memorable digital experiences! ✨",
+  "who are you": "I'm Kirti — a passionate Full Stack Developer who loves building beautiful web applications! ✨",
   "what do you do": "I build full-stack web applications using React, Next.js, Node.js, and various modern technologies! 💻",
   "skills": "My core skills include Frontend (React, Next.js, TypeScript, Tailwind), Backend (Node.js, Express, PostgreSQL, MongoDB), Design (Figma, Framer Motion), and DevOps (Docker, AWS, Vercel)! 🚀",
   "experience": "I started coding in 2020 and have worked on multiple full-stack projects, freelanced for clients, and contributed to open source! 📚",
@@ -361,43 +208,50 @@ const chatbotResponses: Record<string, string> = {
 const getAIResponse = async (userMessage: string): Promise<string> => {
   const lowerMessage = userMessage.toLowerCase();
   for (const [key, response] of Object.entries(chatbotResponses)) {
-    if (lowerMessage.includes(key)) {
-      return response;
-    }
+    if (lowerMessage.includes(key)) return response;
   }
   return chatbotResponses["default"];
 };
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [showChatbot, setShowChatbot] = useState(false);
   const [chatMessages, setChatMessages] = useState<{ text: string; isUser: boolean }[]>([
-    { text: "Hi there! 👋 I'm Kirti's AI assistant. Ask me anything about Kirti's experience, skills, projects, or availability! And don't forget to pet my friend below! 🐾", isUser: false }
+    { text: "Hi there! 👋 I'm Kirti's AI assistant. Ask me anything about Kirti's experience, skills, projects, or availability!", isUser: false }
   ]);
   const [chatInput, setChatInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: useRef(null),
-    offset: ["start end", "end start"],
-  });
+  useEffect(() => {
+    const initAudio = () => {
+      userInteracted = true;
+      document.removeEventListener('click', initAudio);
+      document.removeEventListener('keydown', initAudio);
+    };
+    document.addEventListener('click', initAudio);
+    document.addEventListener('keydown', initAudio);
+    return () => {
+      document.removeEventListener('click', initAudio);
+      document.removeEventListener('keydown', initAudio);
+    };
+  }, []);
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages, isTyping]);
+
+  useEffect(() => {
+    document.body.style.overflow = showChatbot ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [showChatbot]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -422,7 +276,6 @@ export default function Contact() {
         setTimeout(() => setSubmitStatus("idle"), 5000);
       }
     } catch (error) {
-      console.error("Email send error:", error);
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus("idle"), 5000);
     } finally {
@@ -432,27 +285,20 @@ export default function Contact() {
 
   const handleChatSend = async () => {
     if (!chatInput.trim()) return;
-
     if (soundEnabled) playSound('message');
     setChatMessages(prev => [...prev, { text: chatInput, isUser: true }]);
     setIsTyping(true);
-    if (soundEnabled) playSound('typing');
-    
     const botResponse = await getAIResponse(chatInput);
-    
     setTimeout(() => {
       setChatMessages(prev => [...prev, { text: botResponse, isUser: false }]);
       setIsTyping(false);
     }, 500);
-    
     setChatInput("");
   };
 
   const handlePetClick = () => {
     if (soundEnabled) playSound('pet');
-    setChatMessages(prev => [...prev, 
-      { text: "🐾 *pet pet* The little cat purrs happily and gives you a virtual high-five! 🐱✨", isUser: false }
-    ]);
+    setChatMessages(prev => [...prev, { text: "🐾 *pet pet* The little cat purrs happily!", isUser: false }]);
   };
 
   const handleBotClick = () => {
@@ -460,40 +306,27 @@ export default function Contact() {
     setShowChatbot(true);
   };
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatMessages, isTyping]);
-
-  useEffect(() => {
-    if (showChatbot) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [showChatbot]);
-
   return (
     <>
-      <section id="contact" className="relative py-24 sm:py-32 px-4 sm:px-6 bg-[#05011a] overflow-hidden">
-        <SpaceBackground density={30} />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-purple-600/15 blur-[140px]" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-blue-600/15 blur-[140px]" />
+      <section id="contact" className="relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-[#05011a] overflow-hidden">
+        <SpaceBackground density={25} />
+        
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-purple-600/10 blur-[120px]" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] rounded-full bg-blue-600/10 blur-[120px]" />
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Spline 3D Cat Model */}
+        <div className="relative max-w-6xl mx-auto">
+          {/* 3D Cat Model */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center mb-6"
+            className="flex justify-center mb-8"
           >
             <SplineCatModel onClick={handleBotClick} isChatOpen={showChatbot} />
           </motion.div>
 
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -501,9 +334,9 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 mb-4 sm:mb-6 rounded-full border border-purple-500/40 bg-white/5 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full border border-purple-500/40 bg-white/5 backdrop-blur-sm">
               <MessageCircle className="w-3 h-3 text-purple-400" />
-              <span className="text-[10px] sm:text-xs tracking-[0.2em] text-purple-200/90">GET IN TOUCH</span>
+              <span className="text-xs tracking-[0.2em] text-purple-200/90">GET IN TOUCH</span>
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -525,7 +358,7 @@ export default function Contact() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Contact Info */}
+            {/* Contact Info Cards */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -533,28 +366,32 @@ export default function Contact() {
               transition={{ duration: 0.6 }}
               className="space-y-4"
             >
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center mb-4">
+              <div className="group p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm hover:border-purple-500/40 hover:shadow-xl transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Mail className="w-6 h-6 text-purple-400" />
                 </div>
                 <h3 className="text-white font-semibold text-lg mb-2">Email Me</h3>
-                <p className="text-purple-300/70 mb-3">Get a response within 24-48 hours</p>
-                <a href="mailto:kirti@example.com" className="text-purple-400 hover:text-purple-300 transition-colors">
+                <p className="text-purple-300/70 text-sm mb-3">Get a response within 24 hours</p>
+                <a href="mailto:kirti@example.com" className="text-purple-400 hover:text-purple-300 transition-colors font-medium">
                   kirti@example.com
                 </a>
               </div>
 
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center mb-4">
+              <div className="group p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm hover:border-purple-500/40 hover:shadow-xl transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Briefcase className="w-6 h-6 text-purple-400" />
                 </div>
                 <h3 className="text-white font-semibold text-lg mb-2">Open to Work</h3>
-                <p className="text-purple-300/70">Freelance • Full-time • Contract • Remote</p>
+                <p className="text-purple-300/70 text-sm">Freelance • Full-time • Contract • Remote</p>
+                <div className="flex items-center gap-2 mt-3 text-green-400 text-xs">
+                  <CheckCircle className="w-3 h-3" />
+                  <span>Available for immediate start</span>
+                </div>
               </div>
 
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm">
+              <div className="group p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm hover:border-purple-500/40 hover:shadow-xl transition-all">
                 <h3 className="text-white font-semibold text-lg mb-4">Connect Online</h3>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-3">
                   {[
                     { Icon: Github, href: "https://github.com/kirti", label: "GitHub", color: "hover:border-gray-400" },
                     { Icon: Linkedin, href: "https://linkedin.com/in/kirti", label: "LinkedIn", color: "hover:border-blue-400" },
@@ -566,8 +403,8 @@ export default function Contact() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ y: -4, scale: 1.1 }}
-                      className={`w-12 h-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center text-purple-100/80 hover:text-white ${color} transition-colors`}
+                      whileHover={{ y: -5, scale: 1.1 }}
+                      className={`w-11 h-11 rounded-full bg-white/5 border border-white/15 flex items-center justify-center text-purple-300/80 hover:text-white ${color} transition-all`}
                     >
                       <Icon size={18} />
                     </motion.a>
@@ -583,70 +420,77 @@ export default function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm">
-                <h3 className="text-xl font-bold text-white mb-4">Send a Message</h3>
+              <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm">
+                <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
                 
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
                   <div>
+                    <label className="block text-purple-300/80 text-sm mb-2">Your Name</label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-colors"
-                      placeholder="Your Name"
+                      className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-all"
+                      placeholder="John Doe"
                     />
                   </div>
                   
                   <div>
+                    <label className="block text-purple-300/80 text-sm mb-2">Email Address</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-colors"
-                      placeholder="Email Address"
+                      className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-all"
+                      placeholder="john@example.com"
                     />
                   </div>
                   
                   <div>
+                    <label className="block text-purple-300/80 text-sm mb-2">Your Message</label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-colors resize-none"
-                      placeholder="Your Message..."
+                      rows={5}
+                      className="w-full px-5 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-all resize-none"
+                      placeholder="Tell me about your project..."
                     />
                   </div>
                   
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold transition-all hover:shadow-lg hover:shadow-purple-500/30 disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold transition-all hover:shadow-lg hover:shadow-purple-500/30 disabled:opacity-50 group"
                   >
                     {isSubmitting ? (
-                      <>Sending...</>
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending...
+                      </div>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         Send Message
                       </>
                     )}
                   </button>
                   
                   {submitStatus === "success" && (
-                    <div className="p-3 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 text-sm text-center">
-                      ✓ Message sent successfully! I'll get back to you soon.
+                    <div className="p-3 rounded-xl bg-green-500/20 border border-green-500/30 text-green-400 text-sm text-center flex items-center justify-center gap-2">
+                      <CheckCircle className="w-4 h-4" />
+                      Message sent successfully! I'll get back to you soon.
                     </div>
                   )}
                   
                   {submitStatus === "error" && (
-                    <div className="p-3 rounded-lg bg-red-500/20 border border-red-500/30 text-red-400 text-sm text-center">
-                      ✗ Failed to send message. Please try again or email me directly.
+                    <div className="p-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-400 text-sm text-center">
+                      Failed to send message. Please try again or email me directly.
                     </div>
                   )}
                 </form>
@@ -654,46 +498,45 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          <div className="mt-16 pt-8 border-t border-white/5 text-purple-100/40 text-sm text-center">
-            © {new Date().getFullYear()} Kirti — Crafted with motion & code.
+          <div className="mt-16 pt-8 border-t border-white/10 text-purple-100/40 text-sm text-center">
+            © {new Date().getFullYear()} Kirti — Crafted with 💜 & code.
           </div>
         </div>
       </section>
 
-      {/* AI Chatbot Modal */}
-      {showChatbot && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setShowChatbot(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-        >
+      {/* AI Chatbot Modal - Professional Design */}
+      <AnimatePresence>
+        {showChatbot && (
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: "spring", damping: 25 }}
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl h-[650px] rounded-2xl border border-purple-500/30 bg-gradient-to-br from-[#0d0728] to-[#05011a] shadow-2xl overflow-hidden flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowChatbot(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
           >
-            {/* Chat Header */}
-            <div className="p-4 border-b border-white/10 bg-gradient-to-r from-purple-600/20 to-indigo-600/20">
-              <div className="flex items-center justify-between">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-2xl h-[600px] rounded-2xl bg-gradient-to-br from-[#0d0728] to-[#05011a] border border-purple-500/30 shadow-2xl overflow-hidden flex flex-col"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-to-r from-purple-600/20 to-indigo-600/20">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center">
                     <Bot className="w-5 h-5 text-white" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold">AI Assistant</h3>
-                    <p className="text-purple-300/70 text-xs">Ask me anything about Kirti!</p>
+                    <p className="text-purple-300/60 text-xs">Powered by AI</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setSoundEnabled(!soundEnabled)}
                     className="w-8 h-8 rounded-full bg-white/5 border border-white/15 flex items-center justify-center hover:bg-white/10 transition-colors"
-                    title={soundEnabled ? "Mute" : "Unmute"}
                   >
                     {soundEnabled ? <Volume2 className="w-4 h-4 text-purple-400" /> : <VolumeX className="w-4 h-4 text-purple-400" />}
                   </button>
@@ -705,95 +548,94 @@ export default function Contact() {
                   </button>
                 </div>
               </div>
-            </div>
 
-            {/* Chat Area */}
-            <div className="flex-1 overflow-hidden flex">
-              {/* Virtual Pet Section */}
-              <div className="w-1/3 border-r border-white/10 bg-white/5 flex flex-col items-center justify-center p-4">
-                <VirtualPet onClick={handlePetClick} onSound={() => soundEnabled && playSound('pet')} />
-                <p className="text-purple-300/50 text-[10px] text-center mt-4">
-                  My virtual companion 🐾<br />
-                  Click to interact!
-                </p>
-              </div>
+              {/* Body */}
+              <div className="flex-1 flex overflow-hidden">
+                {/* Virtual Pet Sidebar */}
+                <div className="w-1/3 border-r border-white/10 bg-white/5 flex flex-col items-center justify-center p-4">
+                  <VirtualPet onClick={handlePetClick} onSound={() => soundEnabled && playSound('pet')} />
+                  <p className="text-purple-300/40 text-[10px] text-center mt-3">
+                    Click to interact 🐾
+                  </p>
+                </div>
 
-              {/* Chat Messages Section */}
-              <div className="flex-1 flex flex-col overflow-hidden">
-                <div className="flex-1 overflow-y-auto p-4 space-y-3">
-                  {chatMessages.map((msg, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <div className={`max-w-[85%] p-3 rounded-xl ${
-                        msg.isUser 
-                          ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white' 
-                          : 'bg-white/10 border border-white/15 text-purple-200'
-                      }`}>
-                        <p className="text-sm whitespace-pre-wrap">{msg.text}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                  {isTyping && (
-                    <div className="flex justify-start">
-                      <div className="bg-white/10 border border-white/15 rounded-xl p-3">
-                        <div className="flex gap-1">
-                          <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" />
-                          <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce delay-150" />
-                          <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce delay-300" />
+                {/* Chat Area */}
+                <div className="flex-1 flex flex-col overflow-hidden">
+                  <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                    {chatMessages.map((msg, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div className={`max-w-[85%] p-3 rounded-xl ${
+                          msg.isUser 
+                            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white' 
+                            : 'bg-white/10 border border-white/15 text-purple-200'
+                        }`}>
+                          <p className="text-sm">{msg.text}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                    {isTyping && (
+                      <div className="flex justify-start">
+                        <div className="bg-white/10 border border-white/15 rounded-xl p-3">
+                          <div className="flex gap-1">
+                            <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" />
+                            <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce delay-150" />
+                            <div className="w-2 h-2 rounded-full bg-purple-400 animate-bounce delay-300" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                  <div ref={chatEndRef} />
-                </div>
-
-                {/* Suggested Questions */}
-                <div className="p-3 border-t border-white/10 bg-white/5">
-                  <p className="text-purple-300/60 text-xs mb-2">Suggested questions:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {["What skills do you have?", "Tell me about your projects", "Are you available for work?"].map((q) => (
-                      <button
-                        key={q}
-                        onClick={() => {
-                          setChatInput(q);
-                          setTimeout(() => handleChatSend(), 100);
-                        }}
-                        className="text-xs px-2 py-1 rounded-full bg-purple-500/20 text-purple-300 hover:bg-purple-500/30 transition-colors"
-                      >
-                        {q}
-                      </button>
-                    ))}
+                    )}
+                    <div ref={chatEndRef} />
                   </div>
-                </div>
 
-                {/* Chat Input */}
-                <div className="p-4 border-t border-white/10">
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={chatInput}
-                      onChange={(e) => setChatInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleChatSend()}
-                      placeholder="Ask me anything..."
-                      className="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-colors"
-                    />
-                    <button
-                      onClick={handleChatSend}
-                      className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex items-center justify-center hover:scale-105 transition-transform"
-                    >
-                      <SendIcon className="w-4 h-4" />
-                    </button>
+                  {/* Suggested Questions */}
+                  <div className="p-3 border-t border-white/10 bg-white/5">
+                    <p className="text-purple-300/50 text-xs mb-2">Quick questions:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {["What skills do you have?", "Tell me about your projects", "Are you available?"].map((q) => (
+                        <button
+                          key={q}
+                          onClick={() => {
+                            setChatInput(q);
+                            setTimeout(() => handleChatSend(), 100);
+                          }}
+                          className="text-xs px-3 py-1 rounded-full bg-purple-500/15 text-purple-300 hover:bg-purple-500/25 transition-colors"
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Input */}
+                  <div className="p-4 border-t border-white/10">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleChatSend()}
+                        placeholder="Ask me anything..."
+                        className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500/50 transition-colors text-sm"
+                      />
+                      <button
+                        onClick={handleChatSend}
+                        className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex items-center justify-center hover:scale-105 transition-transform"
+                      >
+                        <SendIcon className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
