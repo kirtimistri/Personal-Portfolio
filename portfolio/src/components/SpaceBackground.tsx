@@ -24,12 +24,12 @@ export default function SpaceBackground({ density = 25, className = "" }: Props)
       <motion.div
         animate={{ x: [0, 40, 0], y: [0, -20, 0], opacity: [0.35, 0.6, 0.35] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[10%] left-[-10%] w-[55%] aspect-square rounded-full bg-gradient-to-br from-purple-600/30 via-indigo-500/15 to-transparent blur-3xl"
+        className="absolute top-[10%] left-[-10%] w-[55%] aspect-square rounded-full bg-linear-to-br from-purple-600/30 via-indigo-500/15 to-transparent blur-3xl"
       />
       <motion.div
         animate={{ x: [0, -50, 0], y: [0, 30, 0], opacity: [0.3, 0.55, 0.3] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[5%] right-[-15%] w-[60%] aspect-square rounded-full bg-gradient-to-bl from-blue-600/30 via-purple-600/15 to-transparent blur-3xl"
+        className="absolute bottom-[5%] right-[-15%] w-[60%] aspect-square rounded-full bg-linear-to-bl from-blue-600/30 via-purple-600/15 to-transparent blur-3xl"
       />
       {stars.map((s, i) => (
         <motion.span

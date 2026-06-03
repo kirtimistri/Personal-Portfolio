@@ -1,54 +1,73 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import SpaceBackground from "./SpaceBackground";
-import { 
-  Code2, Globe, Database, Server, Cloud, 
-  Layout, GitBranch, Terminal, Sparkles, 
-  Rocket, Palette, Zap, Shield, Cpu, 
-  Award, Trophy, Medal, Star, ExternalLink,
-  X, CheckCircle, BookOpen, FileText, Image
+import {
+  Code2,
+  Globe,
+  Database,
+  Server,
+  Cloud,
+  Layout,
+  GitBranch,
+  Terminal,
+  Sparkles,
+  Rocket,
+  Palette,
+  Zap,
+  Shield,
+  Cpu,
+  Award,
+  Trophy,
+  Medal,
+  Star,
+  ExternalLink,
+  X,
+  CheckCircle,
+  BookOpen,
+  FileText,
+  Image,
 } from "lucide-react";
 
 const milestones = [
-  { 
-    year: "2020", 
-    title: "Started Coding", 
+  {
+    year: "2020",
+    title: "Started Coding",
     desc: "Wrote my first lines of HTML & CSS and instantly fell in love with building for the web.",
     skills: ["HTML", "CSS", "JavaScript"],
     icons: [Layout, Code2, Terminal],
-    color: "from-emerald-500 to-teal-500"
+    color: "from-emerald-500 to-teal-500",
   },
-  { 
-    year: "2021", 
-    title: "First Freelance Project", 
+  {
+    year: "2021",
+    title: "First Freelance Project",
     desc: "Shipped a landing page for a local business. Discovered the joy of seeing real users use what I built.",
     skills: ["React", "Tailwind CSS", "Git"],
     icons: [Code2, Palette, GitBranch],
-    color: "from-cyan-500 to-blue-500"
+    color: "from-cyan-500 to-blue-500",
   },
-  { 
-    year: "2022", 
-    title: "Full Stack Deep Dive", 
+  {
+    year: "2022",
+    title: "Full Stack Deep Dive",
     desc: "Mastered React, Node.js, and databases. Built several side projects and contributed to open source.",
     skills: ["Node.js", "Express", "MongoDB", "PostgreSQL"],
     icons: [Server, Database, Database, Server],
-    color: "from-purple-500 to-pink-500"
+    color: "from-purple-500 to-pink-500",
   },
-  { 
-    year: "2023", 
-    title: "Internship & Real Teams", 
+  {
+    year: "2023",
+    title: "Internship & Real Teams",
     desc: "Joined a startup as an intern. Learned how production systems are built, tested, and shipped.",
     skills: ["Docker", "AWS", "CI/CD", "Testing"],
     icons: [Cloud, Server, Rocket, Zap],
-    color: "from-orange-500 to-red-500"
+    color: "from-orange-500 to-red-500",
   },
-  { 
-    year: "2024", 
-    title: "Full Stack Developer", 
+  {
+    year: "2024",
+    title: "Full Stack Developer",
     desc: "Now building polished, performant web products end-to-end. Always learning, always shipping.",
     skills: ["Next.js", "TypeScript", "GraphQL", "AI Integration"],
     icons: [Code2, Sparkles, Cpu, Shield],
-    color: "from-indigo-500 to-purple-500"
+    color: "from-indigo-500 to-purple-500",
   },
 ];
 
@@ -58,49 +77,53 @@ const achievements = [
     title: "Hackathon Winner - AI for Good",
     issuer: "DevPost & GitHub",
     date: "2023",
-    description: "Won 1st place among 500+ participants for building an AI-powered accessibility tool that helps visually impaired users navigate websites.",
+    description:
+      "Won 1st place among 500+ participants for building an AI-powered accessibility tool that helps visually impaired users navigate websites.",
     image: "/achievements/hackathon.jpg",
     icon: Trophy,
     color: "from-yellow-500 to-amber-500",
     location: "San Francisco, CA",
-    prize: "$10,000 + Mentorship"
+    prize: "$10,000 + Mentorship",
   },
   {
     id: 2,
     title: "Open Source Excellence Award",
     issuer: "GitHub & Open Source Community",
     date: "2024",
-    description: "Recognized for contributing 50+ pull requests to major open source projects including React, Next.js, and Tailwind CSS documentation.",
+    description:
+      "Recognized for contributing 50+ pull requests to major open source projects including React, Next.js, and Tailwind CSS documentation.",
     image: "/achievements/opensource.jpg",
     icon: Star,
     color: "from-green-500 to-emerald-500",
     location: "Remote",
-    prize: "GitHub Pro + Recognition"
+    prize: "GitHub Pro + Recognition",
   },
   {
     id: 3,
     title: "Best Design Award",
     issuer: "Local Hackathon",
     date: "2023",
-    description: "Awarded for exceptional UI/UX design in a 48-hour hackathon, building a mental health wellness app.",
+    description:
+      "Awarded for exceptional UI/UX design in a 48-hour hackathon, building a mental health wellness app.",
     image: "/achievements/design.jpg",
     icon: Palette,
     color: "from-purple-500 to-pink-500",
     location: "New York, NY",
-    prize: "Design Mentorship"
+    prize: "Design Mentorship",
   },
   {
     id: 4,
     title: "100 Days of Code Challenge",
     issuer: "Self-Initiated",
     date: "2022",
-    description: "Completed 100 consecutive days of coding, building and deploying a project every single day for 100 days.",
+    description:
+      "Completed 100 consecutive days of coding, building and deploying a project every single day for 100 days.",
     image: "/achievements/100days.jpg",
     icon: Medal,
     color: "from-red-500 to-rose-500",
     location: "Online",
-    prize: "Community Recognition"
-  }
+    prize: "Community Recognition",
+  },
 ];
 
 const certifications = [
@@ -109,48 +132,60 @@ const certifications = [
     title: "Full Stack Development Certification",
     issuer: "freeCodeCamp",
     date: "2023",
-    description: "Completed 1000+ hours of coding challenges and built 5 full-stack projects including e-commerce, social media, and analytics dashboards.",
+    description:
+      "Completed 1000+ hours of coding challenges and built 5 full-stack projects including e-commerce, social media, and analytics dashboards.",
     credentialId: "FCC-2023-789",
     image: "/certificates/fullstack.jpg",
     icon: Award,
     color: "from-amber-500 to-orange-500",
-    skills: ["JavaScript", "React", "Node.js", "MongoDB"]
+    skills: ["JavaScript", "React", "Node.js", "MongoDB"],
   },
   {
     id: 2,
     title: "AWS Cloud Practitioner",
     issuer: "Amazon Web Services",
     date: "2024",
-    description: "Certified in cloud fundamentals, AWS services, security best practices, pricing models, and architectural principles.",
+    description:
+      "Certified in cloud fundamentals, AWS services, security best practices, pricing models, and architectural principles.",
     credentialId: "AWS-CP-2024-456",
     image: "/certificates/aws.jpg",
     icon: Cloud,
     color: "from-orange-500 to-yellow-500",
-    skills: ["EC2", "S3", "Lambda", "CloudFormation"]
+    skills: ["EC2", "S3", "Lambda", "CloudFormation"],
   },
   {
     id: 3,
     title: "Meta Frontend Professional",
     issuer: "Meta & Coursera",
     date: "2023",
-    description: "Professional certificate covering advanced React, UI/UX principles, and front-end development best practices.",
+    description:
+      "Professional certificate covering advanced React, UI/UX principles, and front-end development best practices.",
     credentialId: "META-FE-2023-234",
     image: "/certificates/meta.jpg",
     icon: Code2,
     color: "from-blue-500 to-cyan-500",
-    skills: ["React", "UX Design", "APIs", "Testing"]
-  }
+    skills: ["React", "UX Design", "APIs", "Testing"],
+  },
 ];
 
 export default function Journey() {
-  const [selectedAchievement, setSelectedAchievement] = useState<typeof achievements[0] | null>(null);
-  const [selectedCertification, setSelectedCertification] = useState<typeof certifications[0] | null>(null);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  const [selectedAchievement, setSelectedAchievement] = useState<(typeof achievements)[0] | null>(
+    null,
+  );
+  const [selectedCertification, setSelectedCertification] = useState<
+    (typeof certifications)[0] | null
+  >(null);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024,
+  );
   const isMobile = windowWidth < 768;
 
   return (
     <>
-      <section id="journey" className="relative py-24 sm:py-32 px-4 sm:px-6 bg-[#05011a] overflow-hidden">
+      <section
+        id="journey"
+        className="relative py-24 sm:py-32 px-4 sm:px-6 bg-[#05011a] overflow-hidden"
+      >
         <SpaceBackground density={15} />
 
         <div className="relative max-w-6xl mx-auto">
@@ -165,7 +200,7 @@ export default function Journey() {
             <p className="text-purple-300/80 tracking-[0.3em] text-sm mb-4">MY JOURNEY</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               The{" "}
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-indigo-300 to-blue-300">
+              <span className="italic text-transparent bg-clip-text bg-linear-to-r from-purple-300 via-indigo-300 to-blue-300">
                 path
               </span>{" "}
               so far
@@ -177,7 +212,7 @@ export default function Journey() {
 
           {/* Timeline Section */}
           <div className="relative mb-24">
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-purple-500/20 via-indigo-500/15 to-blue-500/5" />
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-purple-500/20 via-indigo-500/15 to-blue-500/5" />
 
             {milestones.map((m, i) => (
               <motion.div
@@ -191,26 +226,28 @@ export default function Journey() {
                 } pl-10 md:pl-0`}
               >
                 <div
-                  className={`absolute top-6 w-3 h-3 rounded-full bg-gradient-to-br ${m.color} shadow-md ${
-                    i % 2 === 0
-                      ? "left-2 md:left-auto md:-right-1.5"
-                      : "left-2 md:-left-1.5"
+                  className={`absolute top-6 w-3 h-3 rounded-full bg-linear-to-br ${m.color} shadow-md ${
+                    i % 2 === 0 ? "left-2 md:left-auto md:-right-1.5" : "left-2 md:-left-1.5"
                   }`}
                 />
-                
+
                 <div className="group relative">
-                  <div className="relative p-5 sm:p-6 rounded-xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+                  <div className="relative p-5 sm:p-6 rounded-xl bg-linear-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-400/25 mb-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 animate-pulse" />
-                      <span className="text-blue-300/80 text-xs tracking-[0.2em] font-medium">{m.year}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-linear-to-r from-purple-400 to-blue-400 animate-pulse" />
+                      <span className="text-blue-300/80 text-xs tracking-[0.2em] font-medium">
+                        {m.year}
+                      </span>
                     </div>
-                    
-                    <h3 className="text-xl md:text-2xl font-bold text-white mt-2 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-blue-300 transition-all duration-300">
+
+                    <h3 className="text-xl md:text-2xl font-bold text-white mt-2 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-purple-300 group-hover:to-blue-300 transition-all duration-300">
                       {m.title}
                     </h3>
-                    
-                    <p className="text-purple-200/75 leading-relaxed text-sm sm:text-base mb-4">{m.desc}</p>
-                    
+
+                    <p className="text-purple-200/75 leading-relaxed text-sm sm:text-base mb-4">
+                      {m.desc}
+                    </p>
+
                     <div className="mt-3 pt-3 border-t border-white/10">
                       <p className="text-purple-300/70 text-xs tracking-wider mb-2 flex items-center gap-2">
                         <Sparkles className="w-3 h-3" />
@@ -220,9 +257,14 @@ export default function Journey() {
                         {m.skills.map((skill, idx) => {
                           const Icon = m.icons[idx];
                           return (
-                            <div key={skill} className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/15 transition-all duration-300 hover:bg-purple-500/15">
+                            <div
+                              key={skill}
+                              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/15 transition-all duration-300 hover:bg-purple-500/15"
+                            >
                               {Icon && <Icon className="w-3 h-3 text-purple-400" />}
-                              <span className="text-xs text-purple-300/80 font-medium">{skill}</span>
+                              <span className="text-xs text-purple-300/80 font-medium">
+                                {skill}
+                              </span>
                             </div>
                           );
                         })}
@@ -249,7 +291,7 @@ export default function Journey() {
               </div>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
                 Awards &{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-yellow-400">
                   Recognition
                 </span>
               </h3>
@@ -270,30 +312,34 @@ export default function Journey() {
                   className="group cursor-pointer"
                   onClick={() => setSelectedAchievement(achievement)}
                 >
-                  <div className="relative h-full rounded-xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/40 hover:shadow-lg overflow-hidden">
-                    <div className={`h-28 bg-gradient-to-br ${achievement.color} relative overflow-hidden flex items-center justify-center`}>
+                  <div className="relative h-full rounded-xl bg-linear-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/40 hover:shadow-lg overflow-hidden">
+                    <div
+                      className={`h-28 bg-linear-to-br ${achievement.color} relative overflow-hidden flex items-center justify-center`}
+                    >
                       {achievement.image ? (
                         <img
                           src={achievement.image}
                           alt={achievement.title}
                           className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
+                            (e.target as HTMLImageElement).style.display = "none";
                           }}
                         />
                       ) : (
                         <achievement.icon className="w-12 h-12 text-white/30 group-hover:scale-110 transition-transform duration-300" />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#05011a]/80 to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-t from-[#05011a]/80 to-transparent" />
                       <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm rounded-full p-1">
                         <Image className="w-2.5 h-2.5 text-white/80" />
                       </div>
                     </div>
-                    
+
                     <div className="p-4">
                       <div className="flex items-start gap-2 mb-1">
                         <achievement.icon className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                        <h4 className="text-white font-semibold text-sm leading-tight line-clamp-2">{achievement.title}</h4>
+                        <h4 className="text-white font-semibold text-sm leading-tight line-clamp-2">
+                          {achievement.title}
+                        </h4>
                       </div>
                       <p className="text-purple-300/70 text-xs">{achievement.issuer}</p>
                       <p className="text-purple-400/60 text-[10px]">{achievement.date}</p>
@@ -323,7 +369,7 @@ export default function Journey() {
               </div>
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
                 Professional{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
                   Certifications
                 </span>
               </h3>
@@ -344,31 +390,37 @@ export default function Journey() {
                   className="group cursor-pointer"
                   onClick={() => setSelectedCertification(cert)}
                 >
-                  <div className="relative h-full rounded-xl bg-gradient-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/40 hover:shadow-lg overflow-hidden">
-                    <div className={`h-36 bg-gradient-to-br ${cert.color} relative overflow-hidden flex items-center justify-center`}>
+                  <div className="relative h-full rounded-xl bg-linear-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/40 hover:shadow-lg overflow-hidden">
+                    <div
+                      className={`h-36 bg-linear-to-br ${cert.color} relative overflow-hidden flex items-center justify-center`}
+                    >
                       {cert.image ? (
                         <img
                           src={cert.image}
                           alt={cert.title}
                           className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
+                            (e.target as HTMLImageElement).style.display = "none";
                           }}
                         />
                       ) : (
                         <cert.icon className="w-16 h-16 text-white/30 group-hover:scale-110 transition-transform duration-300" />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#05011a]/80 to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-t from-[#05011a]/80 to-transparent" />
                       <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm rounded-full p-1.5">
                         <FileText className="w-3 h-3 text-white/80" />
                       </div>
                     </div>
-                    
+
                     <div className="p-5">
-                      <h4 className="text-white font-semibold text-base sm:text-lg mb-1 line-clamp-1">{cert.title}</h4>
+                      <h4 className="text-white font-semibold text-base sm:text-lg mb-1 line-clamp-1">
+                        {cert.title}
+                      </h4>
                       <p className="text-purple-300/70 text-xs mb-1">{cert.issuer}</p>
                       <p className="text-purple-400/60 text-xs">{cert.date}</p>
-                      <p className="text-purple-200/70 text-xs mt-3 line-clamp-2">{cert.description}</p>
+                      <p className="text-purple-200/70 text-xs mt-3 line-clamp-2">
+                        {cert.description}
+                      </p>
                       <div className="mt-4 flex items-center gap-1 text-blue-400/80 text-xs group-hover:translate-x-1 transition-transform">
                         <span>View Certificate</span>
                         <ExternalLink className="w-3 h-3" />
@@ -379,7 +431,7 @@ export default function Journey() {
               ))}
             </div>
           </motion.div>
-          
+
           {/* Future milestone indicator */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -394,7 +446,9 @@ export default function Journey() {
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse delay-150" />
                 <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse delay-300" />
               </div>
-              <span className="text-purple-300/80 text-xs sm:text-sm">Currently learning: Cloud Architecture & AI Integration</span>
+              <span className="text-purple-300/80 text-xs sm:text-sm">
+                Currently learning: Cloud Architecture & AI Integration
+              </span>
               <Rocket className="w-3.5 h-3.5 text-purple-400 animate-pulse" />
             </div>
           </motion.div>
@@ -416,7 +470,7 @@ export default function Journey() {
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full rounded-xl border border-amber-500/30 bg-gradient-to-br from-[#0d0728] to-[#05011a] shadow-2xl overflow-hidden"
+            className="relative max-w-4xl w-full rounded-xl border border-amber-500/30 bg-linear-to-br from-[#0d0728] to-[#05011a] shadow-2xl overflow-hidden"
           >
             <button
               onClick={() => setSelectedAchievement(null)}
@@ -424,15 +478,18 @@ export default function Journey() {
             >
               <X size={20} />
             </button>
-            
-            <div className={`relative h-80 md:h-96 bg-gradient-to-br ${selectedAchievement.color} overflow-hidden`}>
+
+            <div
+              className={`relative h-80 md:h-96 bg-linear-to-br ${selectedAchievement.color} overflow-hidden`}
+            >
               {selectedAchievement.image ? (
                 <img
                   src={selectedAchievement.image}
                   alt={selectedAchievement.title}
                   className="w-full h-full object-contain bg-black/30"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://placehold.co/1200x800/2d1b69/ffffff?text=${encodeURIComponent(selectedAchievement.title)}`;
+                    (e.target as HTMLImageElement).src =
+                      `https://placehold.co/1200x800/2d1b69/ffffff?text=${encodeURIComponent(selectedAchievement.title)}`;
                   }}
                 />
               ) : (
@@ -440,13 +497,15 @@ export default function Journey() {
                   <selectedAchievement.icon className="w-32 h-32 text-white/20" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0728] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#0d0728] via-transparent to-transparent" />
             </div>
-            
+
             <div className="p-6 md:p-8">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{selectedAchievement.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                    {selectedAchievement.title}
+                  </h3>
                   <div className="flex items-center gap-2 text-purple-300/80">
                     <span className="text-sm">{selectedAchievement.issuer}</span>
                     <span className="w-1 h-1 rounded-full bg-purple-400" />
@@ -455,11 +514,11 @@ export default function Journey() {
                 </div>
                 <selectedAchievement.icon className="w-8 h-8 text-amber-400" />
               </div>
-              
+
               <p className="text-purple-200/85 text-base leading-relaxed mb-6">
                 {selectedAchievement.description}
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 {selectedAchievement.location && (
                   <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
@@ -474,11 +533,11 @@ export default function Journey() {
                   </div>
                 )}
               </div>
-              
+
               <div className="flex gap-3 pt-4 border-t border-white/10">
                 <button
                   onClick={() => setSelectedAchievement(null)}
-                  className="flex-1 px-5 py-2.5 rounded-lg bg-gradient-to-r from-amber-600 to-yellow-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-amber-500/30 transition-all"
+                  className="flex-1 px-5 py-2.5 rounded-lg bg-linear-to-r from-amber-600 to-yellow-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-amber-500/30 transition-all"
                 >
                   Close
                 </button>
@@ -503,7 +562,7 @@ export default function Journey() {
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full rounded-xl border border-blue-500/30 bg-gradient-to-br from-[#0d0728] to-[#05011a] shadow-2xl overflow-hidden"
+            className="relative max-w-4xl w-full rounded-xl border border-blue-500/30 bg-linear-to-br from-[#0d0728] to-[#05011a] shadow-2xl overflow-hidden"
           >
             <button
               onClick={() => setSelectedCertification(null)}
@@ -511,15 +570,18 @@ export default function Journey() {
             >
               <X size={20} />
             </button>
-            
-            <div className={`relative h-80 md:h-96 bg-gradient-to-br ${selectedCertification.color} overflow-hidden`}>
+
+            <div
+              className={`relative h-80 md:h-96 bg-linear-to-br ${selectedCertification.color} overflow-hidden`}
+            >
               {selectedCertification.image ? (
                 <img
                   src={selectedCertification.image}
                   alt={selectedCertification.title}
                   className="w-full h-full object-contain bg-black/30"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = `https://placehold.co/1200x800/2d1b69/ffffff?text=${encodeURIComponent(selectedCertification.title)}`;
+                    (e.target as HTMLImageElement).src =
+                      `https://placehold.co/1200x800/2d1b69/ffffff?text=${encodeURIComponent(selectedCertification.title)}`;
                   }}
                 />
               ) : (
@@ -527,13 +589,15 @@ export default function Journey() {
                   <selectedCertification.icon className="w-32 h-32 text-white/20" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0728] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#0d0728] via-transparent to-transparent" />
             </div>
-            
+
             <div className="p-6 md:p-8">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{selectedCertification.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                    {selectedCertification.title}
+                  </h3>
                   <div className="flex items-center gap-2 text-purple-300/80">
                     <span className="text-sm">{selectedCertification.issuer}</span>
                     <span className="w-1 h-1 rounded-full bg-purple-400" />
@@ -542,32 +606,37 @@ export default function Journey() {
                 </div>
                 <selectedCertification.icon className="w-8 h-8 text-blue-400" />
               </div>
-              
+
               <p className="text-purple-200/85 text-base leading-relaxed mb-6">
                 {selectedCertification.description}
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
                   <p className="text-purple-300/70 text-xs mb-1">Credential ID</p>
-                  <p className="text-purple-200/90 text-sm font-mono">{selectedCertification.credentialId}</p>
+                  <p className="text-purple-200/90 text-sm font-mono">
+                    {selectedCertification.credentialId}
+                  </p>
                 </div>
                 <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
                   <p className="text-purple-300/70 text-xs mb-1">Skills Covered</p>
                   <div className="flex flex-wrap gap-1.5 mt-1">
                     {selectedCertification.skills.map((skill) => (
-                      <span key={skill} className="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300/80">
+                      <span
+                        key={skill}
+                        className="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300/80"
+                      >
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex gap-3 pt-4 border-t border-white/10">
                 <button
                   onClick={() => setSelectedCertification(null)}
-                  className="flex-1 px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all"
+                  className="flex-1 px-5 py-2.5 rounded-lg bg-linear-to-r from-blue-600 to-cyan-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/30 transition-all"
                 >
                   Close
                 </button>

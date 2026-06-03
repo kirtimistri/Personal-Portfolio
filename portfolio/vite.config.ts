@@ -1,12 +1,12 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  root: '.',  // This should be the current directory
+  root: ".", // This should be the current directory
   build: {
-    outDir: 'dist',
-    emptyOutDir: true
-  }
-})
+    outDir: "dist",
+    emptyOutDir: true,
+  },
+});

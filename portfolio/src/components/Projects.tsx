@@ -11,7 +11,7 @@
 //     window.addEventListener('resize', handleResize);
 //     return () => window.removeEventListener('resize', handleResize);
 //   }, []);
-  
+
 //   const { scrollYProgress } = useScroll({
 //     target: ref,
 //     offset: ["start end", "end start"],
@@ -31,13 +31,11 @@
 //       {/* Background gradients */}
 //       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,#4c1d95_0%,#1e1b4b_40%,transparent_70%)]" />
 //       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,#3b0764_0%,#1e1b4b_35%,transparent_65%)]" />
-      
+
 //       {/* Floating orbs - reduced on mobile for performance */}
-      
-      
 
 //       {/* Edge guards */}
-      
+
 //     </section>
 //   );
 // }
