@@ -1,4 +1,7 @@
 
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import './styles.css'
 import Hero from './components/Hero'
 import About from './components/About'
 import PersonalProjects from './components/PersonalProjects'
