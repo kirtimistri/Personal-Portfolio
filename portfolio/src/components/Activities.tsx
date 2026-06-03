@@ -199,7 +199,7 @@ const drawingGallery: MediaItem[] = [
 const travelGallery: MediaItem[] = [
   {
     type: "image",
-    url: "/sin1.jpeg",
+    url: "/sin%201.jpeg",
     title: "Swiss Alps",
     description: "Breathtaking views of the Swiss mountains",
     location: "Switzerland",
@@ -232,7 +232,7 @@ const travelGallery: MediaItem[] = [
   {
     type: "video",
     url: "/solarsys.mp4",
-    thumbnail: "/sin1.jpeg",
+    thumbnail: "/sin%201.jpeg",
     title: "Travel Memories Reel",
     description: "A compilation of my best travel moments",
     location: "Various Locations",
