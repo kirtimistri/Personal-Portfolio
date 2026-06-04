@@ -30,142 +30,133 @@ import {
 
 const milestones = [
   {
-    year: "2020",
+    year: "2022",
     title: "Started Coding",
-    desc: "Wrote my first lines of HTML & CSS and instantly fell in love with building for the web.",
-    skills: ["HTML", "CSS", "JavaScript"],
+    desc: "Wrote my first lines of HTML & CSS and C C++.",
+    skills: ["HTML", "CSS", "JavaScript","c","c++"],
     icons: [Layout, Code2, Terminal],
     color: "from-emerald-500 to-teal-500",
   },
   {
-    year: "2021",
-    title: "First Freelance Project",
-    desc: "Shipped a landing page for a local business. Discovered the joy of seeing real users use what I built.",
-    skills: ["React", "Tailwind CSS", "Git"],
+    year: "2023",
+    title: "Started lerning about Python ",
+    desc: "Started DSA in python and python language for first time.",
+    skills: ["DSA", "python"],
     icons: [Code2, Palette, GitBranch],
     color: "from-cyan-500 to-blue-500",
   },
   {
-    year: "2022",
-    title: "Full Stack Deep Dive",
-    desc: "Mastered React, Node.js, and databases. Built several side projects and contributed to open source.",
-    skills: ["Node.js", "Express", "MongoDB", "PostgreSQL"],
-    icons: [Server, Database, Database, Server],
+    year: "2024",
+    title: "Lerned about Database and Frontend",
+    desc: "Mastered React and databases. Built several side projects and contributed to open source started lerning from mini projects.",
+    skills: ["sql", "react.js", "MongoDB", "PostgreSQL"],
+    icons: [Server, Database, Database],
     color: "from-purple-500 to-pink-500",
   },
   {
-    year: "2023",
-    title: "Internship & Real Teams",
-    desc: "Joined a startup as an intern. Learned how production systems are built, tested, and shipped.",
-    skills: ["Docker", "AWS", "CI/CD", "Testing"],
-    icons: [Cloud, Server, Rocket, Zap],
+    year: "2025",
+    title: "Lerned Python Frameworks and Cloud",
+    desc: "Lerned Django ,Django rest framework Bult fullstack project and college projects extended mini project .",
+    skills: ["Django", "DjangoREST","fullstack", "Deployment", "Testing"],
+    icons: [Cloud, Server],
     color: "from-orange-500 to-red-500",
   },
   {
-    year: "2024",
+    year: "2026",
     title: "Full Stack Developer",
-    desc: "Now building polished, performant web products end-to-end. Always learning, always shipping.",
-    skills: ["Next.js", "TypeScript", "GraphQL", "AI Integration"],
+    desc: "Now building polished, performant web products end-to-end. Always learning, Bulding more fullstack applications with New ideas .",
+     skills: ["Django", "DjangoREST","fullstack", "Deployment", "Testing","cloud"],
     icons: [Code2, Sparkles, Cpu, Shield],
     color: "from-indigo-500 to-purple-500",
   },
 ];
 
+// 6 UNIQUE ACHIEVEMENTS (using 6 unique images)
 const achievements = [
   {
     id: 1,
-    title: "Hackathon Winner - AI for Good",
-    issuer: "DevPost & GitHub",
+    title: "BEST PERFORMANCE AWARD",
+    issuer: "Hurestic Technologies",
     date: "2023",
-    description:
-      "Won 1st place among 500+ participants for building an AI-powered accessibility tool that helps visually impaired users navigate websites.",
-    image: "/ecom.jpeg",
+    description: "Won best performer award in Hurestic Technologies internship for outstanding contribution and dedication.",
+    image: "/i1.jpeg",
     icon: Trophy,
     color: "from-yellow-500 to-amber-500",
-    location: "San Francisco, CA",
-    prize: "$10,000 + Mentorship",
+    location: "Indala College of Engineering",
   },
   {
     id: 2,
-    title: "Open Source Excellence Award",
-    issuer: "GitHub & Open Source Community",
-    date: "2024",
-    description:
-      "Recognized for contributing 50+ pull requests to major open source projects including React, Next.js, and Tailwind CSS documentation.",
-    image: "/ticketzila.jpeg",
-    icon: Star,
-    color: "from-green-500 to-emerald-500",
-    location: "Remote",
-    prize: "GitHub Pro + Recognition",
+    title: "HACKATHON WINNER",
+    issuer: "INDALA COLLEGE OF ENGINEERING",
+    date: "2023",
+    description: "Won 1st place among 200+ participants for building an innovative AI-powered Business solution.",
+    image: "/i2.jpeg",
+    icon: Trophy,
+    color: "from-yellow-500 to-amber-500",
+    location: "Indala College of Engineering",
+    prize: "Winner Trophy + Certificate",
   },
   {
     id: 3,
-    title: "Best Design Award",
-    issuer: "Local Hackathon",
+    title: "HACKATHON WINNER",
+    issuer: "INDALA COLLEGE OF ENGINEERING",
     date: "2023",
-    description:
-      "Awarded for exceptional UI/UX design in a 48-hour hackathon, building a mental health wellness app.",
-    image: "/ed.jpeg",
+    description: "Won 1st place among 200+ participants for building an innovative AI-powered Business solution.",
+    image: "/i3.jpeg",
     icon: Palette,
     color: "from-purple-500 to-pink-500",
-    location: "New York, NY",
-    prize: "Design Mentorship",
+    location: "Indala College of Engineering",
   },
   {
     id: 4,
-    title: "100 Days of Code Challenge",
-    issuer: "Self-Initiated",
-    date: "2022",
-    description:
-      "Completed 100 consecutive days of coding, building and deploying a project every single day for 100 days.",
-    image: "/infotech.jpeg",
+    title: "SECOND PLACE IN COLLEGE HACKATHON",
+    issuer: "Local Hackathon",
+    date: "2024",
+    description: "Secured 2nd position for building a mental health wellness app with innovative features.",
+    image: "/i4.jpeg",
     icon: Medal,
     color: "from-red-500 to-rose-500",
+    location: "Indala College of Engineering",
+  },
+  {
+    id: 5,
+    title: "SECOND PLACE IN COLLEGE HACKATHON",
+    issuer: "Local Hackathon",
+    date: "2024",
+    description: "Secured 2nd position for building a mental health wellness app with innovative features.",
+    image: "/i5.jpeg",
+    icon: Star,
+    color: "from-green-500 to-emerald-500",
     location: "Online",
-    prize: "Community Recognition",
+  },
+  {
+    title: "SECOND PLACE IN COLLEGE HACKATHON",
+    issuer: "Local Hackathon",
+    date: "2024",
+    description: "Secured 2nd position for building a mental health wellness app with innovative features.",
+    image: "/i6.jpeg",
+    icon: Award,
+    color: "from-blue-500 to-cyan-500",
+    location: "Global",
   },
 ];
 
+// Certifications section (using placeholder images since you have only 6 unique images)
+// You can either use the same images or add new ones
 const certifications = [
   {
     id: 1,
-    title: "Full Stack Development Certification",
-    issuer: "freeCodeCamp",
-    date: "2023",
-    description:
-      "Completed 1000+ hours of coding challenges and built 5 full-stack projects including e-commerce, social media, and analytics dashboards.",
-    credentialId: "FCC-2023-789",
-    image: "/Resso1.jpeg",
+    title: "Python Certification",
+    issuer: "Hackerrank",
+    
+    description: "Completed 1000+ hours of coding challenges and built 5 full-stack projects.",
+    
+    image: "/c1.jpeg", // Using existing image
     icon: Award,
     color: "from-amber-500 to-orange-500",
     skills: ["JavaScript", "React", "Node.js", "MongoDB"],
   },
-  {
-    id: 2,
-    title: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "2024",
-    description:
-      "Certified in cloud fundamentals, AWS services, security best practices, pricing models, and architectural principles.",
-    credentialId: "AWS-CP-2024-456",
-    image: "/Resso2.jpeg",
-    icon: Cloud,
-    color: "from-orange-500 to-yellow-500",
-    skills: ["EC2", "S3", "Lambda", "CloudFormation"],
-  },
-  {
-    id: 3,
-    title: "Meta Frontend Professional",
-    issuer: "Meta & Coursera",
-    date: "2023",
-    description:
-      "Professional certificate covering advanced React, UI/UX principles, and front-end development best practices.",
-    credentialId: "META-FE-2023-234",
-    image: "/Chitchat.jpeg",
-    icon: Code2,
-    color: "from-blue-500 to-cyan-500",
-    skills: ["React", "UX Design", "APIs", "Testing"],
-  },
+  
 ];
 
 export default function Journey() {
@@ -255,7 +246,7 @@ export default function Journey() {
                       </p>
                       <div className="flex flex-wrap gap-1.5">
                         {m.skills.map((skill, idx) => {
-                          const Icon = m.icons[idx];
+                          const Icon = m.icons[idx % m.icons.length];
                           return (
                             <div
                               key={skill}
@@ -276,7 +267,7 @@ export default function Journey() {
             ))}
           </div>
 
-          {/* Achievements Section - MOVED FIRST */}
+          {/* Achievements Section - 6 unique achievements */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -300,7 +291,7 @@ export default function Journey() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {achievements.map((achievement, i) => (
                 <motion.div
                   key={achievement.id}
@@ -308,13 +299,13 @@ export default function Journey() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -5 }}
                   className="group cursor-pointer"
                   onClick={() => setSelectedAchievement(achievement)}
                 >
                   <div className="relative h-full rounded-xl bg-linear-to-br from-white/8 to-white/2 border border-white/15 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/40 hover:shadow-lg overflow-hidden">
                     <div
-                      className={`h-28 bg-linear-to-br ${achievement.color} relative overflow-hidden flex items-center justify-center`}
+                      className={`h-32 bg-linear-to-br ${achievement.color} relative overflow-hidden flex items-center justify-center`}
                     >
                       {achievement.image ? (
                         <img
@@ -323,24 +314,26 @@ export default function Journey() {
                           className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) {
+                              parent.classList.add("flex", "items-center", "justify-center");
+                              const fallback = document.createElement("div");
+                              fallback.className = "text-white/30 text-center p-4";
+                              fallback.innerHTML = `<span class="text-2xl">🏆</span><p class="text-xs mt-1">${achievement.title.substring(0, 20)}</p>`;
+                              parent.appendChild(fallback);
+                            }
                           }}
                         />
                       ) : (
                         <achievement.icon className="w-12 h-12 text-white/30 group-hover:scale-110 transition-transform duration-300" />
                       )}
                       <div className="absolute inset-0 bg-linear-to-t from-[#05011a]/80 to-transparent" />
-                      <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm rounded-full p-1">
-                        <Image className="w-2.5 h-2.5 text-white/80" />
-                      </div>
                     </div>
 
                     <div className="p-4">
-                      <div className="flex items-start gap-2 mb-1">
-                        <achievement.icon className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                        <h4 className="text-white font-semibold text-sm leading-tight line-clamp-2">
-                          {achievement.title}
-                        </h4>
-                      </div>
+                      <h4 className="text-white font-semibold text-sm leading-tight mb-1 line-clamp-2">
+                        {achievement.title}
+                      </h4>
                       <p className="text-purple-300/70 text-xs">{achievement.issuer}</p>
                       <p className="text-purple-400/60 text-[10px]">{achievement.date}</p>
                       <div className="mt-3 flex items-center gap-1 text-amber-400/80 text-[10px] group-hover:translate-x-1 transition-transform">
@@ -354,7 +347,7 @@ export default function Journey() {
             </div>
           </motion.div>
 
-          {/* Certifications Section - MOVED SECOND */}
+          {/* Certifications Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -378,7 +371,7 @@ export default function Journey() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {certifications.map((cert, i) => (
                 <motion.div
                   key={cert.id}
@@ -401,15 +394,20 @@ export default function Journey() {
                           className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                           onError={(e) => {
                             (e.target as HTMLImageElement).style.display = "none";
+                            const parent = (e.target as HTMLImageElement).parentElement;
+                            if (parent) {
+                              parent.classList.add("flex", "items-center", "justify-center");
+                              const fallback = document.createElement("div");
+                              fallback.className = "text-white/30 text-center p-4";
+                              fallback.innerHTML = `<span class="text-2xl">📜</span><p class="text-xs mt-1">${cert.title.substring(0, 20)}</p>`;
+                              parent.appendChild(fallback);
+                            }
                           }}
                         />
                       ) : (
                         <cert.icon className="w-16 h-16 text-white/30 group-hover:scale-110 transition-transform duration-300" />
                       )}
                       <div className="absolute inset-0 bg-linear-to-t from-[#05011a]/80 to-transparent" />
-                      <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm rounded-full p-1.5">
-                        <FileText className="w-3 h-3 text-white/80" />
-                      </div>
                     </div>
 
                     <div className="p-5">
@@ -455,7 +453,7 @@ export default function Journey() {
         </div>
       </section>
 
-      {/* Achievement Modal - Big Picture */}
+      {/* Achievement Modal */}
       {selectedAchievement && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -547,7 +545,7 @@ export default function Journey() {
         </motion.div>
       )}
 
-      {/* Certification Modal - Big Picture */}
+      {/* Certification Modal */}
       {selectedCertification && (
         <motion.div
           initial={{ opacity: 0 }}
