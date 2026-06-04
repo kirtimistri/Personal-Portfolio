@@ -125,6 +125,22 @@ const jobExperiences = [
     icon: Palette,
     color: "from-indigo-500 to-purple-500",
     type: "internship",
+  },
+  {
+    title: "Python Developer Intern",
+    company: "Hurestic Technopark Pvt Ltd",
+    location: "Nashik, India",
+    period: "6 Months",
+    description:
+      "Deep Sudy of python and its framework with experiance of python Fullstack projects .",
+    achievements: [
+      "implimented python in web development",
+      "Bult end to end web application using python",
+    ],
+    technologies: ["React", "Django", "Django REST Framework", "python", "SQL"],
+    icon: Palette,
+    color: "from-indigo-500 to-yellow-500",
+    type: "internship",
   }
 ];
 

@@ -79,7 +79,7 @@ const achievements = [
     issuer: "Hurestic Technologies",
     date: "2023",
     description: "Won best performer award in Hurestic Technologies internship for outstanding contribution and dedication.",
-    image: "/i1.jpeg",
+    image: "/11.jpeg",
     icon: Trophy,
     color: "from-yellow-500 to-amber-500",
     location: "Indala College of Engineering",
