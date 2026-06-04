@@ -156,6 +156,18 @@ const certifications = [
     color: "from-amber-500 to-orange-500",
     skills: ["JavaScript", "React", "Node.js", "MongoDB"],
   },
+  {
+    id: 2,
+    title: "IIIRC Certification",
+    issuer: "IIIRC Certificatio",
+    
+    description: "Completed last year fullstack project and published paper.",
+    
+    image: "/c2.jpeg", // Using existing image
+    icon: Award,
+    color: "from-amber-500 to-orange-500",
+    skills: ["JavaScript", "React", "Node.js", "MongoDB"],
+  },
   
 ];
 
