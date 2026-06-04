@@ -448,10 +448,10 @@ export default function Contact() {
                 <h3 className="text-white font-semibold text-lg mb-2">Email Me</h3>
                 <p className="text-purple-300/70 text-sm mb-3">Get a response within 24 hours</p>
                 <a
-                  href="mailto:kirti@example.com"
+                  href="kirtimistri07@gmail.com"
                   className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
                 >
-                  kirti@example.com
+                  kirtimistri07@gmail.com
                 </a>
               </div>
 
@@ -475,25 +475,20 @@ export default function Contact() {
                   {[
                     {
                       Icon: Github,
-                      href: "https://github.com/kirti",
+                      href: "https://github.com/kirtimistri?tab=followers",
                       label: "GitHub",
                       color: "hover:border-gray-400",
                     },
                     {
                       Icon: Linkedin,
-                      href: "https://linkedin.com/in/kirti",
+                      href: "https://www.linkedin.com/in/kirti-mistri-2799b5299?utm_source=share_via&utm_content=profile&utm_medium=member_android",
                       label: "LinkedIn",
                       color: "hover:border-blue-400",
                     },
-                    {
-                      Icon: Twitter,
-                      href: "https://twitter.com/kirti",
-                      label: "Twitter",
-                      color: "hover:border-blue-400",
-                    },
+                   
                     {
                       Icon: Instagram,
-                      href: "https://instagram.com/kirti.dev",
+                      href: "https://www.threads.com/@kirti___8652?xmt=AQG0uEs6X5OdRUHxnsYPwVVR-E49wqEtKdjL2l30HlgBn3c",
                       label: "Instagram",
                       color: "hover:border-pink-400",
                     },
