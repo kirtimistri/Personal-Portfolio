@@ -350,6 +350,10 @@ export default function About() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 
+  // Resume file path - update this to match your actual file name
+  const resumeFilePath = "/KIRTI updated resume.pdf";
+  const resumeDisplayName = "/KIRTI updated resume.pdf";
+
   useEffect(() => {
     document.body.style.overflow = showResumeModal ? "hidden" : "";
     return () => {
@@ -359,8 +363,8 @@ export default function About() {
 
   const handleDownloadResume = () => {
     const link = document.createElement("a");
-    link.href = "/kirti updated resume.pdf";
-    link.download = "Kirti_Resume.pdf";
+    link.href = resumeFilePath;
+    link.download = resumeDisplayName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1111,7 +1115,7 @@ export default function About() {
                 </button>
               </div>
               <div className="flex-1 bg-white rounded-b-2xl overflow-hidden">
-                <iframe src="/kirti updated resume.pdf" title="Resume" className="w-full h-full" />
+                <iframe src={resumeFilePath} title="Resume" className="w-full h-full" />
               </div>
               <div className="flex justify-center gap-3 p-4 border-t border-white/10 bg-linear-to-t from-purple-600/20 to-transparent">
                 <button onClick={handleDownloadResume} className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-linear-to-r from-purple-600 to-indigo-600 text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all">
