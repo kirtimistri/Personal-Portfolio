@@ -353,7 +353,7 @@ export default function About() {
   // Resume file path - update this to match your actual file name
   const resumeFilePath = "/KIRTI updated resume.pdf";
   const resumeDisplayName = "/KIRTI updated resume.pdf";
-
+////
   useEffect(() => {
     document.body.style.overflow = showResumeModal ? "hidden" : "";
     return () => {
