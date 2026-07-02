@@ -350,10 +350,10 @@ export default function About() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 
-  // Resume file path - update this to match your actual file name
-  const resumeFilePath = "/KIRTI updated resume.pdf";
-  const resumeDisplayName = "/KIRTI updated resume.pdf";
-////
+  // Resume file path - served from the public folder so it works in Vercel
+  const resumeFilePath = `${import.meta.env.BASE_URL}resume.pdf`;
+  const resumeDisplayName = "KIRTI-resume.pdf";
+
   useEffect(() => {
     document.body.style.overflow = showResumeModal ? "hidden" : "";
     return () => {
